@@ -3,7 +3,8 @@ name = "miniprojekti"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Karlo",email = "kirskaxt@student.jyu.fi"}
+    {name = "Karlo",email = "kirskaxt@student.jyu.fi"},
+    {name = "Touko", email = "touko.j.hanninen@student.jyu.fi"}
 ]
 readme = "README.md"
 requires-python = ">=3.14"
