@@ -16,7 +16,7 @@ Jotta voimme määrittää jonkun vaatimuksen olevan valmis, seuraamme seuraavaa
 # Asennusohjeet
 
 Varmista ensin nämä asiat: 
-* Pythonista vähintään versio (3.14). Jos ei ole, niin asenna täältä uusi (https://www.python.org/downloads/)
+* Pythonista vähintään versio (3.10). Jos ei ole, niin asenna täältä uusi (https://www.python.org/downloads/)
 * Poetry asennettuna. Jos ei ole, niin katso täältä tarkemmat ohjeet (https://ohjelmistotuotanto-jyu.github.io/poetry#ratkaisuja-yleisiin-ongelmiin).
 
 Näiden jälkeen tee seuraavat asiat:
