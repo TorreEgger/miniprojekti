@@ -2,6 +2,7 @@
 Ryhmän 6 toteuttama miniprojekti
 
 [![CI](https://github.com/TorreEgger/miniprojekti/actions/workflows/main.yml/badge.svg)](https://github.com/TorreEgger/miniprojekti/actions/workflows/main.yml)
+[![codecov](https://codecov.io/github/TorreEgger/miniprojekti/graph/badge.svg?token=6J8AK1UX64)](https://codecov.io/github/TorreEgger/miniprojekti)
 
 Projektin backlog: https://jyu-my.sharepoint.com/:x:/g/personal/kirskaxt_jyu_fi/IQAegL_ux5ZjSpN1c-rVZH4CAadPDwjwBHSxYaUqLI5SDEg?e=omyNjP
 
