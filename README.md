@@ -21,6 +21,14 @@ Varmista ensin nämä asiat:
 
 Näiden jälkeen tee seuraavat asiat:
 * Kloonaa projekti itsellesi sopivassa hakemistossa
-* Asenna tarvittavat riippuvuudet komennolla poetry install --no-root
+* Asenna tarvittavat riippuvuudet komennolla "poetry install --no-root"
 
 Asennusohjeita varten katsottu kurssin omia ohjesivuja: (https://ohjelmistotuotanto-jyu.github.io/ongelmia/) sekä (https://ohjelmistotuotanto-jyu.github.io/poetry#ratkaisuja-yleisiin-ongelmiin)
+
+
+# Käyttöohjeet
+
+Testien suoritusta varten:
+* Varmista aluksi että olet projektin juurihakemistossa (siellä missä pyproject.toml).
+* Mene virtuaaliympäristöön komennolla "poetry shell"
+* Suorita testit komennolla "pytest"
