@@ -1,8 +1,21 @@
+"""Ohjelma joka tulostaa tietokannan jokaisen alkion"""
+
+# pylint: disable=too-few-public-methods
+
 from database import Database
 
+
 class Listaus:
-    def setUp(self):
+    """Luokka joka vastaa rivien tulostuksesta"""
+
+    def __init__(self, db_nimi=":memory:"):
+        """Alustaa Listaus-olion ja luo Database-instanssin."""
+        self.db = Database(db_nimi)
+
+    def listaa_kaikki(self):
+        """Tulostaa kaikki tietokannasta löytyvät rivit."""
         rivit = self.db.hae_kaikki()
+
         for rivi in rivit:
             print("-----")
             print(f"viite:  {rivi[1]}")
