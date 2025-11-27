@@ -46,3 +46,17 @@ class Database:
         """, (viite,))
         return self.cursor.fetchone()
 
+	# Hakee kaikki viitteet listaamista varten
+    def hae_kaikki(self):
+        self.cursor.execute("""
+        SELECT * FROM viitteet
+        """)
+        return self.cursor.fetchall()
+
+	# Poistaa yksittäisen viitteen sen viitetiedon avulla
+    def poista_viite(self, viite):
+        self.cursor.execute("""
+        DELETE FROM viitteet
+        WHERE viite = ?
+        """, (viite,))
+        self.conn.commit()
