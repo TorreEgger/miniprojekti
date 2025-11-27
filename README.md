@@ -37,8 +37,8 @@ Testien suoritusta varten:
 * Suorita testit komennolla "pytest"
 
 Ohjelman käynnistämistä varten:
-* Varmista aluksi että olet projektin juurihakemistossa (siellä missä pyproject.toml).
-* Käynnistä ohjelma komennolla "python(3) src/main.py"
+* Käynnistä ohjelma komennolla "python(3) src/Komentorivisovellus.py" jos olet projektin juurihakemistossa (siellä missä pyproject.toml)
+* Jos menet src-hakemistoon, voit vaan antaa komennon "python(3) Komentorivisovellus.py"
 
 Ohjelman käyttämistä varten:
 * Ohjelmalla on käytössä seuraavat komennot "lisää, hae, listaa, poista ja apu"
