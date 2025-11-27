@@ -41,3 +41,4 @@ class TestPoisto(unittest.TestCase):
             self.assertEqual(viite[1], "JJQ12")
 
             self.assertEqual(self.poisto.poista_viite("JJQ12"), 'viite poistettu') #poisto-luokassa onnistunut poisto ilmoitetaan tällä, ehkä jokin parempi keino pitäisi tehdä?
+            self.assertEqual(self.poisto.poista_viite("JJ"), 'ei löytynyt') #poisto-luokassa ilmoitetaan näin, jos poistettavaa viitettä ei löydy
