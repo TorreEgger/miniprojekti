@@ -1,13 +1,13 @@
 from viite import Viite
-
-# Hakee tällä hetkellä vain suoraan listasta, ei sql-tietokannasta
+from database import Database
 
 class ViiteRepo:
-    def __init__(self, viitteet):
-        self.viitteet = viitteet
+    def __init__(self, database):
+        self.database = database
 
-    def hae_tunnisteella(self, tunniste):
-        for viite in self.viitteet:
-            if viite.viite == tunniste:  # viite-luokassa ei ole vielä tunniste attribuuttia --> vaihdetaan viite.tunniste, kun on
-                return viite
-        return None
+    def hae_viite(self, viite):
+        tulos = self.database.hae_viite(viite)
+        if not tulos:
+            return None
+        
+        return tulos
