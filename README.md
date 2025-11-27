@@ -35,3 +35,17 @@ Testien suoritusta varten:
 * Varmista aluksi että olet projektin juurihakemistossa (siellä missä pyproject.toml).
 * Mene virtuaaliympäristöön komennolla "poetry shell"
 * Suorita testit komennolla "pytest"
+
+Ohjelman käynnistämistä varten:
+* Varmista aluksi että olet projektin juurihakemistossa (siellä missä pyproject.toml).
+* Käynnistä ohjelma komennolla "python(3) src/main.py"
+
+Ohjelman käyttämistä varten:
+* Ohjelmalla on käytössä seuraavat komennot "lisää, hae, listaa, poista ja apu"
+* lisää: tämän avulla lisätään viitteet
+* hae: tämän avulal haetaan yksittäiset viitteet
+* listaa: tämän avulla voidaan listata kaikki viitteet
+* poista: tämän avulla voidaan poistaa tietty viite
+* apu: tämän avulla käyttäjä saa ohjeet ohjelman käyttöä varten
+
+
