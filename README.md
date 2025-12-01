@@ -15,6 +15,7 @@ Jotta voimme määrittää jonkun vaatimuksen olevan valmis, seuraamme seuraavaa
 * Dokumentaatio: Kirjoitetut toiminnallisuudet on oltava dokumentoitu selkeästi, jotta muutkin kuin kirjoittaja(t) pystyvät sitä ymmärtämään.
 * Integraatio: Toiminallisuuksien tulee olla integroitu ohjelmistoon ja ne eivät saa olla ristiriidassa keskenään.
 * Tuotantoon vieminen: Lopuksi koodi tulee viedä säilöön! Jos toteutusta on tehty eri haarassa kuin (main/master), niin tulee tehdä merge näiden eri haarojen välille.
+* Hyväksymiskriteerit täyttyy backlogin mukaan
 
 # Asennusohjeet
 
