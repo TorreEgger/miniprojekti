@@ -1,10 +1,21 @@
 from viite import Viite
-from database import Database
 
 class ViiteRepo:
     def __init__(self, database):
         self.database = database
 
+    # Hakee tietokannasta viitteellä ja palauttaa viiteolion tai tyhjän, jos ei löydy
+    def hae_viitteella(self, viite):
+        row = self.database.hae_viite(viite)
+        if not row:
+            return None
+        viite = Viite(viite = row["viite"], 
+                        viitetyyppi = row["type"], 
+                        author = row["author"], 
+                        title = row["title"], 
+                        year = row["year"])
+        return viite
+    
     # Palauttaa viitteen nimeä vastaavan viitteen databasesta
     def hae_viite(self, viite):
         tulos = self.database.hae_viite(viite)
