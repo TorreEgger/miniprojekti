@@ -75,7 +75,7 @@ class Miniprojekti:
 
 def main():
     io = KonsoliIO()
-    db = Database("viitteet.db")
+    db = Database("viitteet.db")    # tämä on gitignoressa ainakin toistaiseksi, jotta tietokanta pysyy "vakiona"
     db.create_table()
     db.insert_defaults()
     repo = ViiteRepo(db)
