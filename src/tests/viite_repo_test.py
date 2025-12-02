@@ -38,7 +38,7 @@ class TestHakuMock(unittest.TestCase):
         # Mock-database repo
         self.repo = ViiteRepo(self.mock_db)
 
-    def test_haku_loytaa_viitteen(self):
+    def test_hae_viite_loytaa_viitteen(self):
         # Mockataan db.hae_viite palauttamaan sqlite-tuple
         self.mock_db.hae_viite.return_value = {
             "viite": "abc",
@@ -58,10 +58,37 @@ class TestHakuMock(unittest.TestCase):
         self.assertEqual(viite["title"], "Otsikko")
         self.assertEqual(viite["year"], 2025)
         
-    def test_palauttaa_none_jos_ei_loydy(self):
+    def test_hae_viite_palauttaa_none_jos_ei_loydy(self):
         self.mock_db.hae_viite.return_value = None
         viite = self.repo.hae_viite("xyz")
         self.mock_db.hae_viite.assert_called_once_with("xyz")
+        self.assertIsNone(viite)
+
+    def test_hae_viitteella_palauttaa_viite_olion_jos_loytyy(self):
+        # Mockataan database.hae_viite palauttamaan rivi
+        self.mock_db.hae_viite.return_value = {
+            "viite": "abc",
+            "type": "inproceedings",
+            "author": "matti",
+            "title": "Otsikko3",
+            "year": 2023
+        }
+
+        viite = self.repo.hae_viitteella("abc")
+        self.mock_db.hae_viite.assert_called_once_with("abc")
+
+        # Tarkistetaan, että palautui Viite-olio
+        self.assertIsNotNone(viite)
+        self.assertEqual(viite.viite, "abc")
+        self.assertEqual(viite.viitetyyppi, "inproceedings")
+        self.assertEqual(viite.author, "matti")
+        self.assertEqual(viite.title, "Otsikko3")
+        self.assertEqual(viite.year, 2023)
+
+    def test_hae_viitteella_palauttaa_none_jos_ei_loydy(self):
+        self.mock_db.hae_viite.return_value = None
+        viite = self.repo.hae_viitteella("tuntematon")
+        self.mock_db.hae_viite.assert_called_once_with("tuntematon")
         self.assertIsNone(viite)
 
     # Hakuehdoilla viitteen hakemisen testit

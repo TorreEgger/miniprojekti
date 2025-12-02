@@ -46,10 +46,16 @@ class Miniprojekti:
                 continue
 
             # Yksittäisen viitteen hakeminen listasta
-            if kasky == "d":
-                self._io.kirjoita("")
-                self._io.kirjoita("4")
-                self._io.kirjoita("")
+            if kasky == "hae":
+                tunnus = self._io.lue("Syota viite:")
+                viite = self.repo.hae_viitteella(tunnus)
+                if not viite:
+                    self._io.kirjoita("Viitettä ei löytynyt")
+                else:
+                    self._io.kirjoita("")
+                    self._io.kirjoita(viite.viite)
+                    self._io.kirjoita(viite.title)
+                    self._io.kirjoita("")
                 continue
             
             if kasky == "help":
