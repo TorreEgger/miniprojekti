@@ -54,7 +54,11 @@ class Miniprojekti:
             
             if kasky == "help":
                 self._io.kirjoita("")
-                self._io.kirjoita("poistu   -poistuu ohjelmasta")
+                self._io.kirjoita("poistu          -poistuu ohjelmasta")
+                self._io.kirjoita("lisaa           -antaa kentät uuden viitteen lisäämistä varten")
+                self._io.kirjoita("hae [viite]     -avulla haetaan tietty viite")
+                self._io.kirjoita("poista [viite]  -avulla poistetaan tietty viite")
+                self._io.kirjoita("listaa          -listaa kaikki viitteet")
                 self._io.kirjoita("")
                 continue
 
