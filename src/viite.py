@@ -1,6 +1,6 @@
 class Viite:
     def __init__(self, viite, viitetyyppi, author, title, year, 
-                 booktitle=None, journal=None, volume=None, pages=None, publisher=None):
+        booktitle=None, journal=None, volume=None, pages=None, publisher=None):
         self.viite = viite
         self.viitetyyppi = viitetyyppi
         self.author = author
