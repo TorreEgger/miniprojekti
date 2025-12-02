@@ -1,7 +1,6 @@
 import unittest
 from unittest.mock import Mock
 from viite_repo import ViiteRepo
-from viite import Viite
 
 class TestHakuMock(unittest.TestCase):
 
@@ -88,6 +87,3 @@ class TestHakuMock(unittest.TestCase):
     def test_ei_loydy_jos_hakuehto_ei_vastaa_mitaan(self):
         tulokset = self.repo.hae_viite_hakuehdoilla(author="olematon")
         self.assertEqual(tulokset, [])
-
-
-
