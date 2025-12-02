@@ -22,6 +22,8 @@ jobs:
         run: poetry install --no-root
       - name: Run tests
         run: poetry run coverage run --branch -m pytest
+      - name: Run lint
+        run: poetry run pylint src
       - name: Coverage report
         run: poetry run coverage xml
       - name: Coverage report to Codecov
