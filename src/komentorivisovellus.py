@@ -4,7 +4,7 @@ from database import Database
 
 class KonsoliIO:
     def lue(self, teksti):
-        return input(teksti)
+        return input(teksti).strip()
     
     def kirjoita(self, teksti):
         print(teksti)
