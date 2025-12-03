@@ -26,16 +26,48 @@ class ViiteRepo:
 
     # Palauttaa hakuehtoja vastaavat viitteet databasesta
     def hae_viite_hakuehdoilla(self, **hakuehdot):
-        kaikki_viitteet = self.database.hae_kaikki()
+        rows = self.database.hae_kaikki()
+
+        # Jos mock-datasta tulee dict-lista, käytetään sellaisenaan
+        if isinstance(rows[0], dict):
+            kaikki = rows
+
+        else:
+            # Muunna tuple -> dict käyttäen cursor.descriptionia
+            columns = [col[0] for col in self.database.cursor.description]
+            kaikki = [dict(zip(columns, row)) for row in rows]
+
         tulokset = []
 
-        for viite in kaikki_viitteet:
+        for viite in kaikki:
             match = True
+
             for kentta, arvo in hakuehdot.items():
-                if kentta not in viite or viite[kentta] != arvo:
-                    match = False
-                    break
-            
+
+                data_arvo = viite.get(kentta)
+
+                # Jos kenttä on None
+                if data_arvo is None:
+                    data_arvo = ""
+
+                # Author-kentälle
+                if kentta == "author":
+                    if arvo not in viite[kentta].lower():
+                        match = False
+                        break
+                
+                # Muille useamman kuin yhden sanan kentille
+                elif kentta in ("title", "booktitle", "publisher"):
+                    if arvo.lower() not in data_arvo.lower():
+                        match = False
+                        break
+
+                # Loput (yhden sanan) kentät
+                else:
+                    if str(viite[kentta]) != str(arvo):
+                        match = False
+                        break
+                    
             if match:
                 tulokset.append(viite)
         
