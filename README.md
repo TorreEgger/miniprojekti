@@ -44,7 +44,7 @@ Ohjelman käynnistämistä varten:
 Ohjelman käyttämistä varten:
 * Ohjelmalla on käytössä seuraavat komennot "lisää, hae, listaa, poista ja apu"
 * lisää: tämän avulla lisätään viitteet
-* hae: tämän avulal haetaan yksittäiset viitteet
+* hae: tämän avulla haetaan yksittäiset viitteet
 * listaa: tämän avulla voidaan listata kaikki viitteet
 * poista: tämän avulla voidaan poistaa tietty viite
 * apu: tämän avulla käyttäjä saa ohjeet ohjelman käyttöä varten
