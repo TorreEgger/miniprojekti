@@ -125,14 +125,22 @@ class Miniprojekti:
                     self._io.kirjoita("")
                 continue
             
+            # ACM-tietokannasta viitteen tiedot
+            if kasky in {'acm', 'ACM'}:
+                self._io.kirjoita("")
+                acm = self._io.lue("Anna ACM-linkki: ")
+                self._io.kirjoita("")
+                continue
+            
             if kasky == "help":
                 self._io.kirjoita("")
-                self._io.kirjoita("poistu          -poistuu ohjelmasta")
-                self._io.kirjoita("lisaa           -antaa kentät uuden viitteen lisäämistä varten")
-                self._io.kirjoita("hae             -avulla haetaan tietty viite")
+                self._io.kirjoita("poistu                     -poistuu ohjelmasta")
+                self._io.kirjoita("lisaa                      -antaa kentät uuden viitteen lisäämistä varten")
+                self._io.kirjoita("hae                        -avulla haetaan tietty viite")
                 self._io.kirjoita("hae ehto1=abc ehto2=xyz    -hakee ehtojen perusteella")
-                self._io.kirjoita("poista [viite]  -avulla poistetaan tietty viite")
-                self._io.kirjoita("listaa          -listaa kaikki viitteet")
+                self._io.kirjoita("poista [viite]             -avulla poistetaan tietty viite")
+                self._io.kirjoita("listaa                     -listaa kaikki viitteet")
+                self._io.kirjoita("acm/ACM                    -hakee ACM-tietokannasta viitteen tiedot")
                 self._io.kirjoita("")
                 continue
 
