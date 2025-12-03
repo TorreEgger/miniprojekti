@@ -50,8 +50,22 @@ class Miniprojekti:
                     self._io.kirjoita("Viite poistettu")
                 continue
 
-            # Viitteen hakeminen listasta hakuehdoilla tai ilman
-            if kasky.startswith("hae "):
+            # Viitteen hakeminen viitteen nimellä tai hakuehtoja käyttäen
+            if kasky.startswith("hae"):
+
+                if kasky.strip() =="hae":
+                    tunnus = self._io.lue("Syötä viite:")
+                    viite = self.repo.hae_viitteella(tunnus)
+
+                    if not viite:
+                        self._io.kirjoita("Viitettä ei löytynyt")
+                    else:
+                        self._io.kirjoita("")
+                        self._io.kirjoita(viite.viite)
+                        self._io.kirjoita(viite.title)
+                        self._io.kirjoita("")
+                    continue
+
                 ehto_teksti = kasky[4:]
                 osat = ehto_teksti.split()
                 hakuehdot = {}
@@ -98,7 +112,8 @@ class Miniprojekti:
                 self._io.kirjoita("")
                 self._io.kirjoita("poistu          -poistuu ohjelmasta")
                 self._io.kirjoita("lisaa           -antaa kentät uuden viitteen lisäämistä varten")
-                self._io.kirjoita("hae [viite]     -avulla haetaan tietty viite")
+                self._io.kirjoita("hae             -avulla haetaan tietty viite")
+                self._io.kirjoita("hae ehto1=abc ehto2=xyz    -hakee ehtojen perusteella")
                 self._io.kirjoita("poista [viite]  -avulla poistetaan tietty viite")
                 self._io.kirjoita("listaa          -listaa kaikki viitteet")
                 self._io.kirjoita("")
