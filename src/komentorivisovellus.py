@@ -42,6 +42,10 @@ class Miniprojekti:
                     lehti = self._io.lue("Missä lehdessä julkaistu?:")
                     self.repo.lisaa_viite(viite, viitetyyppi, tekijä, otsikko, lehti, vuosi, volyymi, sivut)
                     self._io.kirjoita("Viite lisätty!")
+                if viitetyyppi == "book":
+                    julkaisija = self._io.lue("Syötä julkaisija:")
+                    self.repo.lisaa_viite(viite, viitetyyppi, tekijä, otsikko, vuosi, julkaisija)
+                    self._io.kirjoita("Viite lisätty!")
                 continue
 
             # Tallennettujen viitteiden listaaminen
