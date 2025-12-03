@@ -83,4 +83,32 @@ class ViiteRepo:
         
         # jos viite löytyy tietokannasta, tehdään sen poistaminen
         self.database.poista_viite(viite)
-        return('viite poistettu')
+        return'viite poistettu'
+    
+
+    def lisaa_viite(self, viite, type, author, title, year, booktitle=None, journal=None, volume=None, pages=None, publisher=None):
+
+        viite = {
+            "viite": viite,
+            "type": type,
+            "author": author,
+            "title": title,
+            "year": year,
+            "booktitle": booktitle,
+            "journal":  journal,
+            "volume": volume,
+            "pages": pages,
+            "publisher": publisher
+        }
+
+        self.database.lisaa_viite(viite)
+
+        #testataan, että lisäys onnistuu
+        lisattu_viite = self.database.hae_viite(viite["viite"])
+
+        if lisattu_viite is None:
+            return 'lisäys ei onnistunut'
+        return 'lisäys onnistui'
+
+
+

@@ -25,10 +25,23 @@ class Miniprojekti:
                 break
     
             # Viitteiden lisääminen
-            if kasky == "a":
+            if kasky == "lisaa":
                 self._io.kirjoita("")
-                self._io.kirjoita("1")
-                self._io.kirjoita("")
+                viite = self._io.lue("Syötä viite:")          
+                viitetyyppi = self._io.lue("Syötä viitetyyppi:")
+                tekijä = self._io.lue("Syötä tekijä(t):")
+                otsikko = self._io.lue("Syötä otsikko:")
+                vuosi = self._io.lue("Syötä julkaisuvuosi:")
+                if viitetyyppi == "inproceedings":
+                    booktitle = self._io.lue("Syötä otsikko:") # tähän joku parempi kysymmys
+                    self.repo.lisaa_viite(viite, viitetyyppi, tekijä, otsikko, vuosi, booktitle)
+                    self._io.kirjoita("Viite lisätty!")
+                if viitetyyppi == "article":
+                    volyymi = self._io.lue("Syötä volyymi:")
+                    sivut = self._io.lue("Syötä sivumäärä:")
+                    lehti = self._io.lue("Missä lehdessä julkaistu?:")
+                    self.repo.lisaa_viite(viite, viitetyyppi, tekijä, otsikko, lehti, vuosi, volyymi, sivut)
+                    self._io.kirjoita("Viite lisätty!")
                 continue
 
             # Tallennettujen viitteiden listaaminen
