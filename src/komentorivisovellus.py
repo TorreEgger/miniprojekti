@@ -45,16 +45,47 @@ class Miniprojekti:
                 self._io.kirjoita("")
                 continue
 
-            # Yksittäisen viitteen hakeminen listasta
-            if kasky == "hae":
-                tunnus = self._io.lue("Syota viite:")
-                viite = self.repo.hae_viitteella(tunnus)
-                if not viite:
-                    self._io.kirjoita("Viitettä ei löytynyt")
-                else:
-                    self._io.kirjoita("")
-                    self._io.kirjoita(viite.viite)
-                    self._io.kirjoita(viite.title)
+            # Viitteen hakeminen listasta hakuehdoilla tai ilman
+            if kasky.startswith("hae "):
+                ehto_teksti = kasky[4:]
+                osat = ehto_teksti.split()
+                hakuehdot = {}
+                i = 0
+
+                while i < len(osat):
+                    osa = osat[i]
+                    if "=" in osa:
+                        kentta, arvo = osa.split("=", 1)
+                        i += 1
+                        while i < len(osat) and "=" not in osat[i]:
+                            arvo += " " + osat[i]
+                            i += 1
+                        if kentta in ("author", "title", "booktitle", "publisher"):
+                            hakuehdot[kentta] = arvo.lower()
+                        else:
+                            hakuehdot[kentta] = arvo
+                        continue
+                    i += 1
+
+                tulokset = self.repo.hae_viite_hakuehdoilla(**hakuehdot)
+                if not tulokset:
+                    self._io.kirjoita("Ei hakuehtoja vastaavia viitteitä \n")
+                    continue
+
+                self._io.kirjoita("\nHakutulokset:\n")
+                for viite in tulokset:
+                    self._io.kirjoita(f"ID: {viite['id']}")
+                    self._io.kirjoita(f"viite: {viite['viite']}")
+                    self._io.kirjoita(f"type: {viite['type']}")
+                    self._io.kirjoita(f"author: {viite['author']}")
+                    self._io.kirjoita(f"title: {viite['title']}")
+                    self._io.kirjoita(f"year: {viite['year']}")
+
+                    # Valinnaiset kentät:
+                    valinnaiset = ["booktitle", "journal", "volume", "pages", "publisher"]
+                    for k in valinnaiset:
+                        if viite[k]:
+                            self._io.kirjoita(f"{k.capitalize()}: {viite[k]}")
                     self._io.kirjoita("")
                 continue
             

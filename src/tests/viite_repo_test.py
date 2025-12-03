@@ -8,6 +8,12 @@ class TestHakuMock(unittest.TestCase):
         # Mock-database
         self.mock_db = Mock()
 
+        self.mock_db.cursor = Mock()
+        self.mock_db.cursor.description = [
+            ("viite",), ("type",), ("author",), ("title",), ("year",), 
+            ("booktitle",), ("journal",), ("volume",), ("pages",), ("publisher",)
+        ]
+
         # Mock dataa
         self.testiviitteet = [
             {
@@ -16,6 +22,11 @@ class TestHakuMock(unittest.TestCase):
                 "author": "jaska",
                 "title": "Otsikko1",
                 "year": 2023,
+                "booktitle": None,
+                "journal": None,
+                "volume": None,
+                "pages": None,
+                "publisher": None
             },
             {
                 "viite": "def",
@@ -23,6 +34,11 @@ class TestHakuMock(unittest.TestCase):
                 "author": "kalle",
                 "title": "Otsikko2",
                 "year": 2025,
+                "booktitle": None,
+                "journal": None,
+                "volume": None,
+                "pages": None,
+                "publisher": None
             },
             {
                 "viite": "ghi",
@@ -30,6 +46,11 @@ class TestHakuMock(unittest.TestCase):
                 "author": "kalle",
                 "title": "Otsikko2",
                 "year": 2023,
+                "booktitle": None,
+                "journal": None,
+                "volume": None,
+                "pages": None,
+                "publisher": None
             }
         ]
 
