@@ -1,4 +1,5 @@
 from database import Database
+from viite_repo import ViiteRepo
 
 
 class Poisto:

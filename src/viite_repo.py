@@ -40,3 +40,15 @@ class ViiteRepo:
                 tulokset.append(viite)
         
         return tulokset
+    
+
+    def poista_viite(self, viite):
+
+        #testataan ekaksi, että poistettava viite on olemassa
+        haku = self.database.hae_viite(viite)
+        if haku is None:
+            return 'ei löytynyt' 
+        
+        # jos viite löytyy tietokannasta, tehdään sen poistaminen
+        self.database.poista_viite(viite)
+        return('viite poistettu')

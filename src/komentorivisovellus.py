@@ -39,10 +39,15 @@ class Miniprojekti:
                 continue
 
             # Tallennettujen viitteiden poistaminen tietokannasta
-            if kasky == "c":
-                self._io.kirjoita("")
-                self._io.kirjoita("3")
-                self._io.kirjoita("")
+            if kasky == "poista":
+                tunnus = self._io.lue("Syötä poistettava viite:")
+                poistettava_viite = self.repo.hae_viitteella(tunnus)
+                if poistettava_viite is None:
+                    self._io.kirjoita("Poistettavaa viitettä ei löytynyt")
+                else:
+                    self._io.kirjoita("")
+                    self.repo.poista_viite(tunnus)
+                    self._io.kirjoita("Viite poistettu")
                 continue
 
             # Yksittäisen viitteen hakeminen listasta
