@@ -86,19 +86,19 @@ class ViiteRepo:
         return'viite poistettu'
     
 
-    def lisaa_viite(self, viite, type, author, title, year, booktitle=None, journal=None, volume=None, pages=None, publisher=None):
+    def lisaa_viite(self, viite: Viite):
 
         viitetiedot = {
-            "viite": viite,
-            "type": type,
-            "author": author,
-            "title": title,
-            "year": year,
-            "booktitle": booktitle,
-            "journal":  journal,
-            "volume": volume,
-            "pages": pages,
-            "publisher": publisher
+            "viite": viite.viite,
+            "type": viite.viitetyyppi,
+            "author": viite.author,
+            "title": viite.title,
+            "year": viite.year,
+            "booktitle": viite.booktitle,
+            "journal":  viite.journal,
+            "volume": viite.volume,
+            "pages": viite.pages,
+            "publisher": viite.publisher
         }
 
         self.database.lisaa_viite(viitetiedot)

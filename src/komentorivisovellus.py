@@ -35,7 +35,6 @@ class Miniprojekti:
                 vuosi = self._io.lue("Syötä julkaisuvuosi:")
                 if viitetyyppi == "inproceedings":
                     booktitle = self._io.lue("Syötä otsikko:")
-                    #self.repo.database.lisaa_viiteolio(viite, viitetyyppi, tekijä, otsikko, vuosi, booktitle)
                     lisattava_viite = Viite(
                         viite=viite,
                         viitetyyppi=viitetyyppi,
