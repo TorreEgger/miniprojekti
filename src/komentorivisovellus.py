@@ -189,7 +189,6 @@ class Miniprojekti:
                     self._io.kirjoita("")
                     self._io.kirjoita(viite.to_bibtex())
                     self._io.kirjoita("")
-                continue
 
             else:
                 self._io.kirjoita("")
