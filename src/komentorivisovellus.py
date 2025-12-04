@@ -176,6 +176,7 @@ class Miniprojekti:
                 self._io.kirjoita("poista [viite]             -avulla poistetaan tietty viite")
                 self._io.kirjoita("listaa                     -listaa kaikki viitteet")
                 self._io.kirjoita("acm/ACM                    -hakee ACM-tietokannasta viitteen tiedot")
+                self._io.kirjoita("bibtex                     -viitteen tulostaminen BibTeX -muodossa")
                 self._io.kirjoita("")
                 continue
 
@@ -188,6 +189,7 @@ class Miniprojekti:
                     self._io.kirjoita("")
                     self._io.kirjoita(viite.to_bibtex())
                     self._io.kirjoita("")
+                continue
 
             else:
                 self._io.kirjoita("")
@@ -196,7 +198,8 @@ class Miniprojekti:
 
 def main():
     io = KonsoliIO()
-    db = Database("viitteet.db")    # tämä on gitignoressa ainakin toistaiseksi, jotta tietokanta pysyy "vakiona"
+    # tämä on gitignoressa ainakin toistaiseksi, jotta tietokanta pysyy "vakiona"
+    db = Database("viitteet.db")    
     db.create_table()
     db.insert_defaults()
     repo = ViiteRepo(db)
