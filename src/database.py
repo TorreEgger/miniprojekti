@@ -64,11 +64,14 @@ class Database:
         self.conn.commit()
 
     def lisaa_viite(self, data: dict):
-        self.cursor.execute("""
-            INSERT INTO viitteet (viite, type, author, title, year)
-                            VALUES (?, ?, ?, ?, ?)                 
-        """, (data["viite"], data["type"], data["author"], data["title"], data["year"]))
-        self.conn.commit()
+        try:
+            self.cursor.execute("""
+                INSERT INTO viitteet (viite, type, author, title, year)
+                             VALUES (?, ?, ?, ?, ?)                 
+         """, (data["viite"], data["type"], data["author"], data["title"], data["year"]))
+            self.conn.commit()
+        except sqlite3.IntegrityError:
+            return "lisäys epäonnistui"
 
     def hae_viite(self, viite):
         self.cursor.execute("""

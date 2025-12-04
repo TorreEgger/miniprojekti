@@ -26,6 +26,22 @@ class TestLisays(unittest.TestCase):
 
             viite = self.db.hae_viite("JJQ12")
             self.assertEqual(viite[1], "JJQ12")
+
+    
+    def test_lisays_virheellisella_viittella_ei_onnistu(self):
+            self.db.lisaa_viite({
+            "viite": "JJQ13",
+            "type": "book",
+            "author": "Matti Martikainen",
+            "title": "Parhaat kesäkaupungit",
+            "year": None             
+            })
+
+            viite2 = self.db.hae_viite("JJQ13")
+            self.assertEqual(viite2, None)
+
+            
+
            
 
     

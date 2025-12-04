@@ -15,4 +15,4 @@ class Poisto:
         
         # jos viite löytyy tietokannasta, tehdään sen poistaminen
         self.db.poista_viite(viite)
-        return('viite poistettu')
+        return'viite poistettu'
