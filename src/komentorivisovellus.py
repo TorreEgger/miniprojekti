@@ -1,6 +1,7 @@
 # from 'file' import 'function'
 from viite_repo import ViiteRepo
 from database import Database
+from viite import Viite
 
 class KonsoliIO:
     def lue(self, teksti):
@@ -33,18 +34,27 @@ class Miniprojekti:
                 otsikko = self._io.lue("Syötä otsikko:")
                 vuosi = self._io.lue("Syötä julkaisuvuosi:")
                 if viitetyyppi == "inproceedings":
-                    booktitle = self._io.lue("Syötä otsikko:") # tähän joku parempi kysymmys
-                    self.repo.lisaa_viite(viite, viitetyyppi, tekijä, otsikko, vuosi, booktitle)
+                    booktitle = self._io.lue("Syötä otsikko:")
+                    #self.repo.database.lisaa_viiteolio(viite, viitetyyppi, tekijä, otsikko, vuosi, booktitle)
+                    lisattava_viite = Viite(
+                        viite=viite,
+                        viitetyyppi=viitetyyppi,
+                        author=tekijä,
+                        title=otsikko,
+                        booktitle=booktitle,
+                        year=vuosi
+                    )
+                    self.repo.database.lisaa_viiteolio(lisattava_viite)
                     self._io.kirjoita("Viite lisätty!")
                 if viitetyyppi == "article":
                     volyymi = self._io.lue("Syötä volyymi:")
                     sivut = self._io.lue("Syötä sivumäärä:")
                     lehti = self._io.lue("Missä lehdessä julkaistu?:")
-                    self.repo.lisaa_viite(viite, viitetyyppi, tekijä, otsikko, lehti, vuosi, volyymi, sivut)
+                    self.repo.database.lisaa_viitolio(viite, viitetyyppi, tekijä, otsikko, lehti, vuosi, volyymi, sivut)
                     self._io.kirjoita("Viite lisätty!")
                 if viitetyyppi == "book":
                     julkaisija = self._io.lue("Syötä julkaisija:")
-                    self.repo.lisaa_viite(viite, viitetyyppi, tekijä, otsikko, vuosi, julkaisija)
+                    self.repo.database.lisaa_viiteolio(viite, viitetyyppi, tekijä, otsikko, vuosi, julkaisija)
                     self._io.kirjoita("Viite lisätty!")
                 continue
 

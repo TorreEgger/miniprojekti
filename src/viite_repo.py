@@ -88,7 +88,7 @@ class ViiteRepo:
 
     def lisaa_viite(self, viite, type, author, title, year, booktitle=None, journal=None, volume=None, pages=None, publisher=None):
 
-        viite = {
+        viitetiedot = {
             "viite": viite,
             "type": type,
             "author": author,
@@ -101,10 +101,10 @@ class ViiteRepo:
             "publisher": publisher
         }
 
-        self.database.lisaa_viite(viite)
+        self.database.lisaa_viite(viitetiedot)
 
         #testataan, että lisäys onnistuu
-        lisattu_viite = self.database.hae_viite(viite["viite"])
+        lisattu_viite = self.database.hae_viite(viitetiedot["viite"])
 
         if lisattu_viite is None:
             return 'lisäys ei onnistunut'
