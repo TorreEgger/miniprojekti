@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.14.0 on win32)" generated="2025-12-04T14:47:27.501378" rpa="false" schemaversion="5">
+<suite id="s1" name="Src" source="F:\Yliopisto\projekti\miniprojekti\src">
+<suite id="s1-s1" name="Tests" source="F:\Yliopisto\projekti\miniprojekti\src\tests">
+<suite id="s1-s1-s1" name="Miniprojekti" source="F:\Yliopisto\projekti\miniprojekti\src\tests\miniprojekti.robot">
+<test id="s1-s1-s1-t1" name="Listaa Viitteet BibTeX-Muodossa" line="10">
+<kw name="Create Test Project" owner="MiniprojektiLibrary">
+<status status="PASS" start="2025-12-04T14:47:27.573754" elapsed="0.000353"/>
+</kw>
+<kw name="Set User Inputs" owner="MiniprojektiLibrary">
+<arg>listaa</arg>
+<arg>y</arg>
+<arg>poistu</arg>
+<status status="PASS" start="2025-12-04T14:47:27.574301" elapsed="0.000111"/>
+</kw>
+<kw name="Run Application" owner="MiniprojektiLibrary">
+<status status="PASS" start="2025-12-04T14:47:27.574562" elapsed="0.000081"/>
+</kw>
+<kw name="Output Should Contain" owner="MiniprojektiLibrary">
+<arg>@inproceedings{abc</arg>
+<status status="PASS" start="2025-12-04T14:47:27.574759" elapsed="0.000078"/>
+</kw>
+<kw name="Output Should Contain" owner="MiniprojektiLibrary">
+<arg>author = {Kalle}</arg>
+<status status="PASS" start="2025-12-04T14:47:27.574955" elapsed="0.000093"/>
+</kw>
+<kw name="Output Should Contain" owner="MiniprojektiLibrary">
+<arg>title = {Testi}</arg>
+<status status="PASS" start="2025-12-04T14:47:27.575165" elapsed="0.000086"/>
+</kw>
+<status status="PASS" start="2025-12-04T14:47:27.573064" elapsed="0.002332"/>
+</test>
+<test id="s1-s1-s1-t2" name="Listaa Viitteet Normaali" line="18">
+<kw name="Create Test Project" owner="MiniprojektiLibrary">
+<status status="PASS" start="2025-12-04T14:47:27.576098" elapsed="0.000082"/>
+</kw>
+<kw name="Set User Inputs" owner="MiniprojektiLibrary">
+<arg>listaa</arg>
+<arg>n</arg>
+<arg>poistu</arg>
+<status status="PASS" start="2025-12-04T14:47:27.576296" elapsed="0.000078"/>
+</kw>
+<kw name="Run Application" owner="MiniprojektiLibrary">
+<status status="PASS" start="2025-12-04T14:47:27.576497" elapsed="0.000071"/>
+</kw>
+<kw name="Output Should Contain" owner="MiniprojektiLibrary">
+<arg>viite: abc</arg>
+<status status="PASS" start="2025-12-04T14:47:27.576678" elapsed="0.000072"/>
+</kw>
+<kw name="Output Should Contain" owner="MiniprojektiLibrary">
+<arg>author: Kalle</arg>
+<status status="PASS" start="2025-12-04T14:47:27.576862" elapsed="0.000070"/>
+</kw>
+<status status="PASS" start="2025-12-04T14:47:27.575811" elapsed="0.001254"/>
+</test>
+<test id="s1-s1-s1-t3" name="Listaa Viitteet Virheinput" line="25">
+<kw name="Create Test Project" owner="MiniprojektiLibrary">
+<status status="PASS" start="2025-12-04T14:47:27.577679" elapsed="0.000083"/>
+</kw>
+<kw name="Set User Inputs" owner="MiniprojektiLibrary">
+<arg>listaa</arg>
+<arg>a</arg>
+<arg>poistu</arg>
+<status status="PASS" start="2025-12-04T14:47:27.577878" elapsed="0.000082"/>
+</kw>
+<kw name="Run Application" owner="MiniprojektiLibrary">
+<status status="PASS" start="2025-12-04T14:47:27.578081" elapsed="0.000065"/>
+</kw>
+<kw name="Output Should Contain" owner="MiniprojektiLibrary">
+<arg>, mitään ei tulosteta</arg>
+<status status="PASS" start="2025-12-04T14:47:27.578256" elapsed="0.000071"/>
+</kw>
+<status status="PASS" start="2025-12-04T14:47:27.577442" elapsed="0.001022"/>
+</test>
+<status status="PASS" start="2025-12-04T14:47:27.529937" elapsed="0.049067"/>
+</suite>
+<status status="PASS" start="2025-12-04T14:47:27.528839" elapsed="0.050854"/>
+</suite>
+<status status="PASS" start="2025-12-04T14:47:27.502603" elapsed="0.077646"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Src" id="s1" pass="3" fail="0" skip="0">Src</stat>
+<stat name="Tests" id="s1-s1" pass="3" fail="0" skip="0">Src.Tests</stat>
+<stat name="Miniprojekti" id="s1-s1-s1" pass="3" fail="0" skip="0">Src.Tests.Miniprojekti</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
