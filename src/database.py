@@ -1,4 +1,5 @@
 import sqlite3
+from viite import Viite
 
 class Database:
     def __init__(self, db_nimi = ":memory:"):
@@ -61,6 +62,22 @@ class Database:
                             "38--46")                
         """)
         
+        self.conn.commit()
+
+    def lisaa_viiteolio(self, viite: Viite):
+        self.cursor.execute("""
+        INSERT INTO viitteet (viite, type, author, title, year, booktitle, journal, volume, pages, publisher)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)                    
+        """, (viite.viite, 
+              viite.viitetyyppi, 
+              viite.author, 
+              viite.title, 
+              viite.year, 
+              viite.booktitle, 
+              viite.journal,
+              viite.volume,
+              viite.pages,
+              viite.publisher))
         self.conn.commit()
 
     def lisaa_viite(self, data: dict):
