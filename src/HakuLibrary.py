@@ -1,4 +1,4 @@
-from viite import Viite
+#from viite import Viite
 from viite_repo import ViiteRepo
 from komentorivisovellus import Miniprojekti
 from stub_io import StubIO

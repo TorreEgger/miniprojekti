@@ -88,7 +88,7 @@ class Database:
          """, (data["viite"], data["type"], data["author"], data["title"], data["year"]))
             self.conn.commit()
         except sqlite3.IntegrityError:
-            return "lisäys epäonnistui"
+            print('epäonnistui')
 
     def hae_viite(self, viite):
         self.cursor.execute("""

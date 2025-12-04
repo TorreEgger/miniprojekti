@@ -150,4 +150,3 @@ class ViiteRepo:
             rivit.append("")
             
         return "\n".join(rivit)
-

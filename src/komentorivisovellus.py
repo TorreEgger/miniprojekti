@@ -163,7 +163,7 @@ class Miniprojekti:
             # ACM-tietokannasta viitteen tiedot
             if kasky in {'acm', 'ACM'}:
                 self._io.kirjoita("")
-                acm = self._io.lue("Anna ACM-linkki: ")
+                #acm = self._io.lue("Anna ACM-linkki: ")
                 self._io.kirjoita("")
                 continue
             

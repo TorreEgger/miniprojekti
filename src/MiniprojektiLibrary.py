@@ -2,7 +2,7 @@
 # Kirjastotiedosto Robot Framework-testejä varten
 
 from viite_repo import ViiteRepo
-from viite import Viite
+#from viite import Viite
 from komentorivisovellus import Miniprojekti
 from stub_io import StubIO
 from stub_db import StubDB
