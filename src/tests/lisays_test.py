@@ -14,7 +14,7 @@ class TestLisays(unittest.TestCase):
         self.lisays = ViiteRepo(self.db)
         
 
-
+    #poistaminen onnistuu
     def test_lisays_onnistuu(self):
         viite = Viite(
              viite="JOU22",
@@ -30,7 +30,7 @@ class TestLisays(unittest.TestCase):
         viite3 = self.db.hae_viite("JOU22")   
         self.assertEqual(viite3[1], "JOU22")  
 
-
+    #poistaminen epäonnistuu virheellisillä tiedoilla
     def test_lisays_epaonnistuu_virheellisilla_tiedoilla(self):
         viite2 = Viite(
              viite="JOU23",
