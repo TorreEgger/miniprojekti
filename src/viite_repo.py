@@ -110,5 +110,44 @@ class ViiteRepo:
             return 'lisäys ei onnistunut'
         return 'lisäys onnistui'
 
+    def listaa_kaikki(self):
+        tulokset = self.database.hae_kaikki()
+        if not tulokset:
+            return "Tietokanta on tyhjä\n"
+        
+        rivit = []
+        rivit.append("Hakutulokset:\n")
 
+        for viite in tulokset:
+            #rivit.append(f"ID: {viite['id']}")
+            rivit.append(f"viite: {viite['viite']}")
+            rivit.append(f"type: {viite['type']}")
+            rivit.append(f"author: {viite['author']}")
+            rivit.append(f"title: {viite['title']}")
+            rivit.append(f"year: {viite['year']}")
+
+            # Valinnaiset kentät:
+            valinnaiset = ["booktitle", "journal", "volume", "pages", "publisher"]
+            for k in valinnaiset:
+                if viite[k]:
+                    rivit.append(f"{k.capitalize()}: {viite[k]}")
+            rivit.append("")
+        
+        return "\n".join(rivit)
+    
+    def listaa_kaikki_bibtex(self):
+        tulokset = self.database.hae_kaikki()
+
+        if not tulokset:
+            return "Tietokanta on tyhjä\n"
+
+        rivit = []
+        rivit.append("Hakutulokset BibTeX-muodossa:\n")
+
+        for viite in tulokset:
+            viitetunnus = self.hae_viitteella(viite['viite'])
+            rivit.append(viitetunnus.to_bibtex())
+            rivit.append("")
+            
+        return "\n".join(rivit)
 
