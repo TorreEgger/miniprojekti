@@ -17,7 +17,10 @@ disable=raw-checker-failed,
         missing-class-docstring,
         too-few-public-methods,
         trailing-whitespace,
-        missing-final-newline
+        missing-final-newline,
+        too-many-instance-attributes,
+        too-many-arguments,
+        too-many-positional-arguments
 
 [FORMAT]
 
