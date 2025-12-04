@@ -50,11 +50,29 @@ class Miniprojekti:
                     volyymi = self._io.lue("Syötä volyymi:")
                     sivut = self._io.lue("Syötä sivumäärä:")
                     lehti = self._io.lue("Missä lehdessä julkaistu?:")
-                    self.repo.database.lisaa_viitolio(viite, viitetyyppi, tekijä, otsikko, lehti, vuosi, volyymi, sivut)
+                    lisattava_viite = Viite(
+                        viite=viite,
+                        viitetyyppi=viitetyyppi,
+                        author=tekijä,
+                        title=otsikko,
+                        year=vuosi,
+                        journal=lehti,
+                        volume=volyymi,
+                        pages=sivut
+                    )
+                    self.repo.database.lisaa_viiteolio(lisattava_viite)
                     self._io.kirjoita("Viite lisätty!")
                 if viitetyyppi == "book":
                     julkaisija = self._io.lue("Syötä julkaisija:")
-                    self.repo.database.lisaa_viiteolio(viite, viitetyyppi, tekijä, otsikko, vuosi, julkaisija)
+                    lisattava_viite = Viite(
+                        viite=viite,
+                        viitetyyppi=viitetyyppi,
+                        author=tekijä,
+                        title=otsikko,
+                        year=vuosi,
+                        publisher=julkaisija
+                    )
+                    self.repo.database.lisaa_viiteolio(lisattava_viite)
                     self._io.kirjoita("Viite lisätty!")
                 continue
 
