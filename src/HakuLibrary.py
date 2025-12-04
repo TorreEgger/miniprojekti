@@ -1,3 +1,5 @@
+# pylint: skip-file
+
 #from viite import Viite
 from viite_repo import ViiteRepo
 from komentorivisovellus import Miniprojekti

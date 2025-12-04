@@ -1,3 +1,5 @@
+# pylint: skip-file
+
 # MiniprojektiLibrary.py
 # Kirjastotiedosto Robot Framework-testejä varten
 

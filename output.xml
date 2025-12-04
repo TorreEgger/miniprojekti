@@ -1,152 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.2 (Python 3.14.0 on win32)" generated="2025-12-04T17:52:50.897880" rpa="false" schemaversion="5">
-<suite id="s1" name="Tests" source="C:\kurssit\ohjelmistotuotanto\miniprojekti\src\tests">
-<suite id="s1-s1" name="Hakeminen" source="C:\kurssit\ohjelmistotuotanto\miniprojekti\src\tests\hakeminen.robot">
-<test id="s1-s1-t1" name="Käyttäjä Voi Filtteröidä Yhden Hakuehdon Perusteella" line="8">
+<robot generator="Robot 7.3.2 (Python 3.14.0 on win32)" generated="2025-12-04T19:42:31.111598" rpa="false" schemaversion="5">
+<suite id="s1" name="Src" source="F:\Yliopisto\projekti\miniprojekti\src">
+<suite id="s1-s1" name="Tests" source="F:\Yliopisto\projekti\miniprojekti\src\tests">
+<suite id="s1-s1-s1" name="Hakeminen" source="F:\Yliopisto\projekti\miniprojekti\src\tests\hakeminen.robot">
+<test id="s1-s1-s1-t1" name="Käyttäjä Voi Filtteröidä Yhden Hakuehdon Perusteella" line="8">
 <kw name="Create Test Env" owner="HakuLibrary">
-<status status="PASS" start="2025-12-04T17:52:50.935226" elapsed="0.000150"/>
+<status status="PASS" start="2025-12-04T19:42:31.192424" elapsed="0.002380"/>
 </kw>
 <kw name="Set User Inputs" owner="HakuLibrary">
 <arg>hae year=2021</arg>
 <arg>poistu</arg>
-<status status="PASS" start="2025-12-04T17:52:50.935740" elapsed="0.000197"/>
+<status status="PASS" start="2025-12-04T19:42:31.194976" elapsed="0.000117"/>
 </kw>
 <kw name="Run Application" owner="HakuLibrary">
-<status status="PASS" start="2025-12-04T17:52:50.936179" elapsed="0.000146"/>
+<status status="PASS" start="2025-12-04T19:42:31.195261" elapsed="0.000114"/>
 </kw>
 <kw name="Output Should Contain" owner="HakuLibrary">
 <arg>ccc</arg>
-<status status="PASS" start="2025-12-04T17:52:50.936523" elapsed="0.000104"/>
+<status status="PASS" start="2025-12-04T19:42:31.195506" elapsed="0.000082"/>
 </kw>
 <kw name="Output Should Contain" owner="HakuLibrary">
 <arg>ddd</arg>
-<status status="PASS" start="2025-12-04T17:52:50.936888" elapsed="0.000089"/>
+<status status="PASS" start="2025-12-04T19:42:31.195713" elapsed="0.000076"/>
 </kw>
 <kw name="Output Should Not Contain" owner="HakuLibrary">
 <arg>aaa</arg>
-<status status="PASS" start="2025-12-04T17:52:50.937208" elapsed="0.000402"/>
+<status status="PASS" start="2025-12-04T19:42:31.195911" elapsed="0.000098"/>
 </kw>
 <kw name="Output Should Not Contain" owner="HakuLibrary">
 <arg>bbb</arg>
-<status status="PASS" start="2025-12-04T17:52:50.937867" elapsed="0.000116"/>
+<status status="PASS" start="2025-12-04T19:42:31.196199" elapsed="0.000088"/>
 </kw>
-<status status="PASS" start="2025-12-04T17:52:50.934293" elapsed="0.004026"/>
+<status status="PASS" start="2025-12-04T19:42:31.191781" elapsed="0.004669"/>
 </test>
-<test id="s1-s1-t2" name="Käyttäjä Voi Filtteröidä Useamman Hakuehdon Perusteella" line="17">
+<test id="s1-s1-s1-t2" name="Käyttäjä Voi Filtteröidä Useamman Hakuehdon Perusteella" line="17">
 <kw name="Create Test Env" owner="HakuLibrary">
-<status status="PASS" start="2025-12-04T17:52:50.939607" elapsed="0.000103"/>
+<status status="PASS" start="2025-12-04T19:42:31.197198" elapsed="0.000087"/>
 </kw>
 <kw name="Set User Inputs" owner="HakuLibrary">
 <arg>hae author=kalle year=2022</arg>
 <arg>poistu</arg>
-<status status="PASS" start="2025-12-04T17:52:50.939951" elapsed="0.000140"/>
+<status status="PASS" start="2025-12-04T19:42:31.197405" elapsed="0.000090"/>
 </kw>
 <kw name="Run Application" owner="HakuLibrary">
-<status status="PASS" start="2025-12-04T17:52:50.940341" elapsed="0.000116"/>
+<status status="PASS" start="2025-12-04T19:42:31.197617" elapsed="0.000083"/>
 </kw>
 <kw name="Output Should Contain" owner="HakuLibrary">
 <arg>bbb</arg>
-<status status="PASS" start="2025-12-04T17:52:50.940675" elapsed="0.000103"/>
+<status status="PASS" start="2025-12-04T19:42:31.197816" elapsed="0.000072"/>
 </kw>
 <kw name="Output Should Not Contain" owner="HakuLibrary">
 <arg>ddd</arg>
-<status status="PASS" start="2025-12-04T17:52:50.941018" elapsed="0.000107"/>
+<status status="PASS" start="2025-12-04T19:42:31.198006" elapsed="0.000074"/>
 </kw>
-<status status="PASS" start="2025-12-04T17:52:50.939129" elapsed="0.002244"/>
+<status status="PASS" start="2025-12-04T19:42:31.196880" elapsed="0.001339"/>
 </test>
-<test id="s1-s1-t3" name="Käyttäjä Ei Saa Tuloksia Jos Ei Löydy Vastaavia Viitteitä" line="24">
+<test id="s1-s1-s1-t3" name="Käyttäjä Ei Saa Tuloksia Jos Ei Löydy Vastaavia Viitteitä" line="24">
 <kw name="Create Test Env" owner="HakuLibrary">
-<status status="PASS" start="2025-12-04T17:52:50.942300" elapsed="0.000140"/>
+<status status="PASS" start="2025-12-04T19:42:31.198852" elapsed="0.000080"/>
 </kw>
 <kw name="Set User Inputs" owner="HakuLibrary">
 <arg>hae author=olavi</arg>
 <arg>poistu</arg>
-<status status="PASS" start="2025-12-04T17:52:50.942704" elapsed="0.000095"/>
+<status status="PASS" start="2025-12-04T19:42:31.199046" elapsed="0.000094"/>
 </kw>
 <kw name="Run Application" owner="HakuLibrary">
-<status status="PASS" start="2025-12-04T17:52:50.943063" elapsed="0.000123"/>
+<status status="PASS" start="2025-12-04T19:42:31.199790" elapsed="0.000137"/>
 </kw>
 <kw name="Output Should Contain" owner="HakuLibrary">
 <arg>Ei hakuehtoja vastaavia viitteitä</arg>
-<status status="PASS" start="2025-12-04T17:52:50.943422" elapsed="0.000090"/>
+<status status="PASS" start="2025-12-04T19:42:31.200079" elapsed="0.000091"/>
 </kw>
-<status status="PASS" start="2025-12-04T17:52:50.941833" elapsed="0.001974"/>
+<status status="PASS" start="2025-12-04T19:42:31.198589" elapsed="0.001729"/>
 </test>
-<status status="PASS" start="2025-12-04T17:52:50.925122" elapsed="0.019574"/>
+<status status="PASS" start="2025-12-04T19:42:31.163205" elapsed="0.037645"/>
 </suite>
-<suite id="s1-s2" name="Miniprojekti" source="C:\kurssit\ohjelmistotuotanto\miniprojekti\src\tests\miniprojekti.robot">
-<test id="s1-s2-t1" name="Listaa Viitteet BibTeX-Muodossa" line="10">
+<suite id="s1-s1-s2" name="Miniprojekti" source="F:\Yliopisto\projekti\miniprojekti\src\tests\miniprojekti.robot">
+<test id="s1-s1-s2-t1" name="Listaa Viitteet BibTeX-Muodossa" line="10">
 <kw name="Create Test Project" owner="MiniprojektiLibrary">
-<status status="PASS" start="2025-12-04T17:52:50.954681" elapsed="0.000145"/>
+<status status="PASS" start="2025-12-04T19:42:31.205994" elapsed="0.000178"/>
 </kw>
 <kw name="Set User Inputs" owner="MiniprojektiLibrary">
 <arg>listaa</arg>
 <arg>y</arg>
 <arg>poistu</arg>
-<status status="PASS" start="2025-12-04T17:52:50.955073" elapsed="0.000098"/>
+<status status="PASS" start="2025-12-04T19:42:31.206609" elapsed="0.000107"/>
 </kw>
 <kw name="Run Application" owner="MiniprojektiLibrary">
-<status status="PASS" start="2025-12-04T17:52:50.955377" elapsed="0.000089"/>
+<status status="PASS" start="2025-12-04T19:42:31.206852" elapsed="0.000086"/>
 </kw>
 <kw name="Output Should Contain" owner="MiniprojektiLibrary">
 <arg>@inproceedings{abc</arg>
-<status status="PASS" start="2025-12-04T17:52:50.955700" elapsed="0.000102"/>
+<status status="PASS" start="2025-12-04T19:42:31.207054" elapsed="0.000084"/>
 </kw>
 <kw name="Output Should Contain" owner="MiniprojektiLibrary">
 <arg>author = {Kalle}</arg>
-<status status="PASS" start="2025-12-04T17:52:50.956074" elapsed="0.000114"/>
+<status status="PASS" start="2025-12-04T19:42:31.207257" elapsed="0.000085"/>
 </kw>
 <kw name="Output Should Contain" owner="MiniprojektiLibrary">
 <arg>title = {Testi}</arg>
-<status status="PASS" start="2025-12-04T17:52:50.956393" elapsed="0.000106"/>
+<status status="PASS" start="2025-12-04T19:42:31.207466" elapsed="0.000079"/>
 </kw>
-<status status="PASS" start="2025-12-04T17:52:50.954106" elapsed="0.002639"/>
+<status status="PASS" start="2025-12-04T19:42:31.205675" elapsed="0.002008"/>
 </test>
-<test id="s1-s2-t2" name="Listaa Viitteet Normaali" line="18">
+<test id="s1-s1-s2-t2" name="Listaa Viitteet Normaali" line="18">
 <kw name="Create Test Project" owner="MiniprojektiLibrary">
-<status status="PASS" start="2025-12-04T17:52:50.957560" elapsed="0.000113"/>
+<status status="PASS" start="2025-12-04T19:42:31.208456" elapsed="0.000104"/>
 </kw>
 <kw name="Set User Inputs" owner="MiniprojektiLibrary">
 <arg>listaa</arg>
 <arg>n</arg>
 <arg>poistu</arg>
-<status status="PASS" start="2025-12-04T17:52:50.958011" elapsed="0.000117"/>
+<status status="PASS" start="2025-12-04T19:42:31.208686" elapsed="0.000081"/>
 </kw>
 <kw name="Run Application" owner="MiniprojektiLibrary">
-<status status="PASS" start="2025-12-04T17:52:50.958386" elapsed="0.000114"/>
+<status status="PASS" start="2025-12-04T19:42:31.208896" elapsed="0.000078"/>
 </kw>
 <kw name="Output Should Contain" owner="MiniprojektiLibrary">
 <arg>viite: abc</arg>
-<status status="PASS" start="2025-12-04T17:52:50.958732" elapsed="0.000097"/>
+<status status="PASS" start="2025-12-04T19:42:31.209095" elapsed="0.000072"/>
 </kw>
 <kw name="Output Should Contain" owner="MiniprojektiLibrary">
 <arg>author: Kalle</arg>
-<status status="PASS" start="2025-12-04T17:52:50.959082" elapsed="0.000114"/>
+<status status="PASS" start="2025-12-04T19:42:31.209285" elapsed="0.000073"/>
 </kw>
-<status status="PASS" start="2025-12-04T17:52:50.957175" elapsed="0.002276"/>
+<status status="PASS" start="2025-12-04T19:42:31.208106" elapsed="0.001383"/>
 </test>
-<test id="s1-s2-t3" name="Listaa Viitteet Virheinput" line="25">
+<test id="s1-s1-s2-t3" name="Listaa Viitteet Virheinput" line="25">
 <kw name="Create Test Project" owner="MiniprojektiLibrary">
-<status status="PASS" start="2025-12-04T17:52:50.960216" elapsed="0.000087"/>
+<status status="PASS" start="2025-12-04T19:42:31.210203" elapsed="0.000150"/>
 </kw>
 <kw name="Set User Inputs" owner="MiniprojektiLibrary">
 <arg>listaa</arg>
 <arg>a</arg>
 <arg>poistu</arg>
-<status status="PASS" start="2025-12-04T17:52:50.960565" elapsed="0.000115"/>
+<status status="PASS" start="2025-12-04T19:42:31.210487" elapsed="0.000081"/>
 </kw>
 <kw name="Run Application" owner="MiniprojektiLibrary">
-<status status="PASS" start="2025-12-04T17:52:50.960901" elapsed="0.000077"/>
+<status status="PASS" start="2025-12-04T19:42:31.210692" elapsed="0.000065"/>
 </kw>
 <kw name="Output Should Contain" owner="MiniprojektiLibrary">
 <arg>, mitään ei tulosteta</arg>
-<status status="PASS" start="2025-12-04T17:52:50.961168" elapsed="0.000079"/>
+<status status="PASS" start="2025-12-04T19:42:31.210868" elapsed="0.000076"/>
 </kw>
-<status status="PASS" start="2025-12-04T17:52:50.959862" elapsed="0.001672"/>
+<status status="PASS" start="2025-12-04T19:42:31.209921" elapsed="0.001159"/>
 </test>
-<status status="PASS" start="2025-12-04T17:52:50.945535" elapsed="0.016816"/>
+<status status="PASS" start="2025-12-04T19:42:31.201417" elapsed="0.010116"/>
 </suite>
-<status status="PASS" start="2025-12-04T17:52:50.899389" elapsed="0.064056"/>
+<status status="PASS" start="2025-12-04T19:42:31.162133" elapsed="0.050029"/>
+</suite>
+<status status="PASS" start="2025-12-04T19:42:31.112837" elapsed="0.099911"/>
 </suite>
 <statistics>
 <total>
@@ -155,9 +158,10 @@
 <tag>
 </tag>
 <suite>
-<stat name="Tests" id="s1" pass="6" fail="0" skip="0">Tests</stat>
-<stat name="Hakeminen" id="s1-s1" pass="3" fail="0" skip="0">Tests.Hakeminen</stat>
-<stat name="Miniprojekti" id="s1-s2" pass="3" fail="0" skip="0">Tests.Miniprojekti</stat>
+<stat name="Src" id="s1" pass="6" fail="0" skip="0">Src</stat>
+<stat name="Tests" id="s1-s1" pass="6" fail="0" skip="0">Src.Tests</stat>
+<stat name="Hakeminen" id="s1-s1-s1" pass="3" fail="0" skip="0">Src.Tests.Hakeminen</stat>
+<stat name="Miniprojekti" id="s1-s1-s2" pass="3" fail="0" skip="0">Src.Tests.Miniprojekti</stat>
 </suite>
 </statistics>
 <errors>
