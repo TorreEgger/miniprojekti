@@ -47,6 +47,7 @@ Ohjelman käyttämistä varten:
 * hae: tämän avulla haetaan yksittäiset viitteet
 * listaa: tämän avulla voidaan listata kaikki viitteet
 * poista: tämän avulla voidaan poistaa tietty viite
-* apu: tämän avulla käyttäjä saa ohjeet ohjelman käyttöä varten
+* bibtex: tulostaa annetun viitten BibTeX -muodossa
+* help: tämän avulla käyttäjä saa ohjeet ohjelman käyttöä varten
 
 
