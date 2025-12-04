@@ -1,5 +1,6 @@
 import unittest
 from database import Database
+from viite import Viite
 
 class TestDB(unittest.TestCase):
     def setUp(self):
@@ -25,3 +26,20 @@ class TestDB(unittest.TestCase):
         rivi = self.db.hae_viite("VPL11")
 
         self.assertEqual(rivi ["type"], "inproceedings")
+
+    def test_viitteen_lisaaminen_oliona(self):
+        viiteolio = Viite("zimmerman2002becoming", 
+                          "article", 
+                          "Zimmerman, Barry J", 
+                          "Becoming a self-regulated learner: An overview", 
+                          2002, 
+                          journal="Theory into practice", 
+                          volume="42", 
+                          pages="64--70", 
+                          publisher="Taylor & Francis")
+
+        self.db.lisaa_viiteolio(viiteolio)
+
+        rivi = self.db.hae_viite("zimmerman2002becoming")
+        self.assertEqual(rivi["type"], viiteolio.viitetyyppi)
+        self.assertEqual(rivi["pages"], viiteolio.pages)
