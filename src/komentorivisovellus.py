@@ -77,10 +77,18 @@ class Miniprojekti:
                 continue
 
             # Tallennettujen viitteiden listaaminen
-            if kasky == "b":
+            if kasky == "listaa":
                 self._io.kirjoita("")
-                self._io.kirjoita("2")
-                self._io.kirjoita("")
+                onkobib = self._io.lue("Haluatko listan BibTeX-muodossa? (y/n):")
+                if onkobib == "y":
+                    tulokset = self.repo.listaa_kaikki_bibtex()
+                    self._io.kirjoita(tulokset)
+                    continue
+                if onkobib == "n":
+                    tulokset = self.repo.listaa_kaikki()
+                    self._io.kirjoita(tulokset)
+                    continue
+                self._io.kirjoita("Annoit virheellisen komennon, mitään ei tulosteta")
                 continue
 
             # Tallennettujen viitteiden poistaminen tietokannasta
