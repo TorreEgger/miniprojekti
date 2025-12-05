@@ -42,7 +42,7 @@ Ohjelman käynnistämistä varten:
 * Jos menet src-hakemistoon, voit vaan antaa komennon "python(3) komentorivisovellus.py"
 
 Ohjelman käyttämistä varten:
-* Ohjelmalla on käytössä seuraavat komennot "lisää, hae, listaa, poista, bibtext ja help"
+* Ohjelmalla on käytössä seuraavat komennot "lisää, hae, listaa, poista, bibtex ja help"
 * lisää: tämän avulla lisätään viitteet
 * hae: tämän avulla haetaan yksittäiset viitteet
 * listaa: tämän avulla voidaan listata kaikki viitteet
