@@ -1,16 +1,20 @@
 class Viite:
     def __init__(self, viite, viitetyyppi, author, title, year, 
-        booktitle=None, journal=None, volume=None, pages=None, publisher=None):
+        booktitle=None, journal=None, volume=None, pages=None, publisher=None, lisakentat=None):
         self.viite = viite
         self.viitetyyppi = viitetyyppi
         self.author = author
         self.title = title
         self.year = year
-        self.booktitle = booktitle
-        self.journal = journal
-        self.volume = volume
-        self.pages = pages
-        self.publisher = publisher
+        self.booktitle = booktitle          #
+        self.journal = journal              #  nämä voitaisiin varmaan lisätä
+        self.volume = volume                #  myös lisänkenttiin, jätän
+        self.pages = pages                  #  ne toistaiseksi tähän, kun ne 
+        self.publisher = publisher          #  ovat vielä käytössä muualla koodissa
+        if lisakentat is None:
+            self.lisakentat = {}
+        else:
+            self.lisakentat = lisakentat
 
     def to_bibtex(self):
         lines = [f"@{self.viitetyyppi}{{{self.viite},",
@@ -31,6 +35,10 @@ class Viite:
             lines.append(f"    pages = {{{self.pages}}}")
         if self.publisher:
             lines.append(f"    publisher = {{{self.publisher}}}")
+
+        if self.lisakentat:
+            for key, value in self.lisakentat.items():
+                lines.append(f"    {key} = {{{value}}}")
 
         lines.append("}")
 

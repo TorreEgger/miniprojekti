@@ -1,6 +1,8 @@
 import unittest
 from unittest.mock import Mock
 from viite_repo import ViiteRepo
+from database import Database
+from viite import Viite
 
 class TestHakuMock(unittest.TestCase):
 
@@ -59,6 +61,12 @@ class TestHakuMock(unittest.TestCase):
         # Mock-database repo
         self.repo = ViiteRepo(self.mock_db)
 
+        # In memory db, koska Toukolle mockit liian vaikeita
+        db = Database()
+        db.create_table()
+        db.insert_defaults()
+        self.db_repo = ViiteRepo(db)
+
     def test_hae_viite_loytaa_viitteen(self):
         # Mockataan db.hae_viite palauttamaan sqlite-tuple
         self.mock_db.hae_viite.return_value = {
@@ -87,24 +95,15 @@ class TestHakuMock(unittest.TestCase):
 
     def test_hae_viitteella_palauttaa_viite_olion_jos_loytyy(self):
         # Mockataan database.hae_viite palauttamaan rivi
-        self.mock_db.hae_viite.return_value = {
-            "viite": "abc",
-            "type": "inproceedings",
-            "author": "matti",
-            "title": "Otsikko3",
-            "year": 2023
-        }
-
-        viite = self.repo.hae_viitteella("abc")
-        self.mock_db.hae_viite.assert_called_once_with("abc")
-
+        viite = self.db_repo.hae_viitteella("CBH91")
+        
         # Tarkistetaan, että palautui Viite-olio
         self.assertIsNotNone(viite)
-        self.assertEqual(viite.viite, "abc")
-        self.assertEqual(viite.viitetyyppi, "inproceedings")
-        self.assertEqual(viite.author, "matti")
-        self.assertEqual(viite.title, "Otsikko3")
-        self.assertEqual(viite.year, 2023)
+        self.assertEqual(viite.viite, "CBH91")
+        self.assertEqual(viite.viitetyyppi, "article")
+        self.assertEqual(viite.author, "Allan Collins and John Seely Brown and Ann Holum")
+        self.assertEqual(viite.title, "Cognitive apprenticeship: making thinking visible")
+        self.assertEqual(viite.year, 1991)
 
     def test_hae_viitteella_palauttaa_none_jos_ei_loydy(self):
         self.mock_db.hae_viite.return_value = None
@@ -167,3 +166,15 @@ class TestHakuMock(unittest.TestCase):
         self.assertNotIn("Volume:", tulos)
         self.assertNotIn("Pages:", tulos)
         self.assertNotIn("Publisher:", tulos)
+
+    def test_viiteolion_saa_lisakentat(self):
+        lisakentat = {
+            "language": "English",
+            "ISBN": "9780134757599"
+        }
+        uusi = Viite("joku42", "book", "Fowler, Martin", "Refactoring", 2019, lisakentat=lisakentat)
+
+        response = self.db_repo.lisaa_viiteolio(uusi)
+        self.assertEqual(response, "Viite lisätty!")
+        viite = self.db_repo.hae_viitteella("joku42")
+        self.assertEqual(viite.lisakentat["language"], "English")

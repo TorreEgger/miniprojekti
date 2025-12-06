@@ -43,3 +43,34 @@ class TestDB(unittest.TestCase):
         rivi = self.db.hae_viite("zimmerman2002becoming")
         self.assertEqual(rivi["type"], viiteolio.viitetyyppi)
         self.assertEqual(rivi["pages"], viiteolio.pages)
+
+
+    def test_viitetta_ei_lisatty_koska_viite_loytyy_jo(self):
+        viiteolio = Viite("VPL11", "article", "Pellonpää Erkki", "Hyvää itsenäisyyspäivää!", 2025)
+        response = self.db.lisaa_viiteolio(viiteolio)
+        self.assertNotEqual(response, self.db.viite_lisatty)
+
+    def test_lisakenttien_hakeminen_onnistuu_jos_viitteella_on_niita(self):
+        kentat = self.db.hae_lisakentat("VPL11")
+        self.assertEqual(kentat[0]["field"], "lisakentta")
+
+    def test_kaikki_lisatyt_viitteet_loytyvat(self):
+        viitteet = self.db.hae_kaikki()
+        self.assertEqual(len(viitteet), 3)
+
+    def test_poistamisen_jalkeen_viitetta_ei_loydy(self):
+        viite = "VPL11"
+        loytyy = self.db.hae_viite(viite)
+        self.assertTrue(loytyy)
+        self.db.poista_viite(viite)
+        loytyyko_viela = self.db.hae_viite(viite)
+        self.assertFalse(loytyyko_viela)
+
+    def test_viitteelle_voi_lisata_kenttia(self):
+        kentta = "pages"
+        arvo = "672"
+        viite = "Martin09"
+        self.db.lisaa_kentta(viite, kentta, arvo)
+        lisatty = self.db.hae_lisakentat(viite)
+        self.assertEqual(lisatty[0]["field"], "pages")
+        self.assertEqual(lisatty[0]["value"], "672")

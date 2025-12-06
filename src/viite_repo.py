@@ -9,11 +9,24 @@ class ViiteRepo:
         row = self.database.hae_viite(viite)
         if not row:
             return None
+        
+        rivit = self.database.hae_lisakentat(viite)
+        kentat = {}
+        for rivi in rivit:
+            kentat[rivi["field"]] = rivi["value"]
+
         viite = Viite(viite = row["viite"], 
                         viitetyyppi = row["type"], 
                         author = row["author"], 
                         title = row["title"], 
-                        year = row["year"])
+                        year = row["year"],
+                        booktitle = row["booktitle"],
+                        journal = row["journal"],
+                        pages = row["pages"],
+                        volume = row["volume"],
+                        publisher = row["publisher"],
+                        lisakentat = kentat)
+        
         return viite
     
     # Palauttaa viitteen nimeä vastaavan viitteen databasesta
@@ -85,6 +98,10 @@ class ViiteRepo:
         self.database.poista_viite(viite)
         return'viite poistettu'
     
+
+    def lisaa_viiteolio(self, viite: Viite):
+        response = self.database.lisaa_viiteolio(viite)
+        return response
 
     def lisaa_viite(self, viite: Viite):
 
