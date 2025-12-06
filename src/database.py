@@ -28,13 +28,14 @@ class Database:
         )                    
         """)
 
+        #viiteId vastaa tässä siis viitteet taulun "viite" kenttää eikä "id":tä
         self.cursor.execute("""
         CREATE TABLE IF NOT EXISTS kentat (
             viiteId TEXT NOT NULL,
             field TEXT NOT NULL,
             value TEXT NOT NULL,
             PRIMARY KEY (viiteId, field),
-            FOREIGN KEY (viiteId) REFERENCES viitteet(id) ON DELETE CASCADE                    
+            FOREIGN KEY (viiteId) REFERENCES viitteet(viiteId) ON DELETE CASCADE                    
         )                    
         """)
 
@@ -151,4 +152,10 @@ class Database:
         DELETE FROM viitteet
         WHERE viite = ?
         """, (viite,))
+
+        self.cursor.execute("""
+        DELETE FROM kentat
+        WHERE viiteId = ?
+        """, (viite,))
+
         self.conn.commit()

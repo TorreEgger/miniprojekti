@@ -74,3 +74,31 @@ class TestDB(unittest.TestCase):
         lisatty = self.db.hae_lisakentat(viite)
         self.assertEqual(lisatty[0]["field"], "pages")
         self.assertEqual(lisatty[0]["value"], "672")
+
+    def test_kentan_lisaaminen_uudestaan_paivittaa_arvoa(self):
+        kentta = "pages"
+        arvo = "672"
+        viite = "Martin09"
+        self.db.lisaa_kentta(viite, kentta, arvo)
+        lisatty = self.db.hae_lisakentat(viite)
+        self.assertEqual(lisatty[0]["value"], "672")
+
+        arvo = "666"
+        self.db.lisaa_kentta(viite, kentta, arvo)
+        lisatty = self.db.hae_lisakentat(viite)
+        self.assertEqual(lisatty[0]["value"], "666")
+
+    def test_viitteen_poistaminen_poistaa_myos_lisakentat(self):
+        viite = "VPL11"
+        loytyy = self.db.hae_viite(viite)
+        self.assertIsNotNone(loytyy)
+        lisakentta_loytyy = self.db.hae_lisakentat(viite)
+        self.assertIsNotNone(lisakentta_loytyy)
+
+        self.db.poista_viite("VPL11")
+
+        ei_loydy = self.db.hae_viite(viite)
+        self.assertIsNone(ei_loydy)
+
+        ei_kenttia = self.db.hae_lisakentat(viite)
+        self.assertEqual(len(ei_kenttia), 0)
