@@ -148,6 +148,15 @@ class ViiteRepo:
             for k in valinnaiset:
                 if viite[k]:
                     rivit.append(f"{k.capitalize()}: {viite[k]}")
+            
+            lisakentat = self.database.hae_lisakentat(viite['viite'])
+
+            for row in lisakentat:
+                field = row["field"]
+                value = row["value"]
+                rivit.append(f"{field.capitalize()}: {value}")
+            
+            
             rivit.append("")
         
         return "\n".join(rivit)

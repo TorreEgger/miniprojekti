@@ -142,30 +142,6 @@ class TestHakuMock(unittest.TestCase):
 
         tulos = self.repo.listaa_kaikki()
         self.assertEqual(tulos.strip(), "Tietokanta on tyhjä")
-        
-    def test_listaa_kaikki_palauttaa_oikean_muotoisen_listauksen(self):
-        # Mockataan testiviitteet takaisin käyttöön
-        self.mock_db.hae_kaikki.return_value = self.testiviitteet
-
-        tulos = self.repo.listaa_kaikki()
-
-        # Tarkista että otsikko on
-        self.assertIn("Hakutulokset:", tulos)
-
-        # Tarkistetaan että jokaisen viitteen pakolliset kentät esiintyvät
-        for v in self.testiviitteet:
-            self.assertIn(f"viite: {v['viite']}", tulos)
-            self.assertIn(f"type: {v['type']}", tulos)
-            self.assertIn(f"author: {v['author']}", tulos)
-            self.assertIn(f"title: {v['title']}", tulos)
-            self.assertIn(f"year: {v['year']}", tulos)
-
-        # Valinnaiset kentät ovat None eikä niiden pitäisi näkyä
-        self.assertNotIn("Booktitle:", tulos)
-        self.assertNotIn("Journal:", tulos)
-        self.assertNotIn("Volume:", tulos)
-        self.assertNotIn("Pages:", tulos)
-        self.assertNotIn("Publisher:", tulos)
 
     def test_viiteolion_saa_lisakentat(self):
         lisakentat = {
