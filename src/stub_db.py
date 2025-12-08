@@ -1,3 +1,5 @@
+# pylint: skip-file
+
 # Stubi-tietokannalle mitä käytetään Robot-testaukseen
 # Tänne lisätään ViiteRepon komentoja testausta varten
 
@@ -13,3 +15,6 @@ class StubDB:
             if viite.get("viite") == viitetunnus:
                 return viite
         return None
+    
+    def hae_lisakentat(self, viite):
+        return []
