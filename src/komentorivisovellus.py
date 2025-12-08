@@ -27,6 +27,7 @@ class Miniprojekti:
     
             # Viitteiden lisääminen
             if kasky == "lisaa":
+                lisattava_viite = ""
                 self._io.kirjoita("")
                 viite = self._io.lue("Syötä viite:")          
                 viitetyyppi = self._io.lue("Syötä viitetyyppi:")
@@ -43,8 +44,6 @@ class Miniprojekti:
                         booktitle=booktitle,
                         year=vuosi
                     )
-                    self.repo.database.lisaa_viiteolio(lisattava_viite)
-                    self._io.kirjoita("Viite lisätty!")
                 if viitetyyppi == "article":
                     volyymi = self._io.lue("Syötä volyymi:")
                     sivut = self._io.lue("Syötä sivumäärä:")
@@ -59,8 +58,6 @@ class Miniprojekti:
                         volume=volyymi,
                         pages=sivut
                     )
-                    self.repo.database.lisaa_viiteolio(lisattava_viite)
-                    self._io.kirjoita("Viite lisätty!")
                 if viitetyyppi == "book":
                     julkaisija = self._io.lue("Syötä julkaisija:")
                     lisattava_viite = Viite(
@@ -71,8 +68,8 @@ class Miniprojekti:
                         year=vuosi,
                         publisher=julkaisija
                     )
-                    self.repo.database.lisaa_viiteolio(lisattava_viite)
-                    self._io.kirjoita("Viite lisätty!")
+                self.repo.database.lisaa_viiteolio(lisattava_viite)
+                self._io.kirjoita("Viite lisätty!")
                 continue
 
             # Tallennettujen viitteiden listaaminen
