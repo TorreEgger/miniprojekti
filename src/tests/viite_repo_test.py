@@ -135,6 +135,10 @@ class TestHakuMock(unittest.TestCase):
         tulokset = self.repo.hae_viite_hakuehdoilla(author="olematon")
         self.assertEqual(tulokset, [])
 
+    def test_palauttaa_tyhjan_jos_kentta_none(self):
+        tulokset = self.repo.hae_viite_hakuehdoilla(journal=None)
+        self.assertEqual(tulokset, [])
+
     # Kaikkien viitteiden listauksien testit
     def test_listaa_kaikki_palauttaa_tyhjan_viestin_jos_ei_tuloksia(self):
         # Mockataan tyhjä tietokanta

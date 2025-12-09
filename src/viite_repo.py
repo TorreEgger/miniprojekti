@@ -62,6 +62,8 @@ class ViiteRepo:
                 # Jos kenttä on None
                 if data_arvo is None:
                     data_arvo = ""
+                    match = False
+                    break
 
                 # Author-kentälle
                 if kentta == "author":
