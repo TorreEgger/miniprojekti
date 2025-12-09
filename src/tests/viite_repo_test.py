@@ -1,5 +1,6 @@
 import unittest
 from unittest.mock import Mock
+from unittest.mock import MagicMock
 from viite_repo import ViiteRepo
 from database import Database
 from viite import Viite
@@ -9,7 +10,6 @@ class TestHakuMock(unittest.TestCase):
     def setUp(self):
         # Mock-database
         self.mock_db = Mock()
-
         self.mock_db.cursor = Mock()
         self.mock_db.cursor.description = [
             ("viite",), ("type",), ("author",), ("title",), ("year",), 
@@ -73,6 +73,13 @@ class TestHakuMock(unittest.TestCase):
         # Mock-database repo
         self.repo = ViiteRepo(self.mock_db)
 
+        # Toinen DB ja testidataa tuple muunnoksen testausta varten
+        self.db2 = MagicMock()
+        self.db2.cursor = MagicMock()
+
+        self.db2.cursor.description = [("viite",), ("author",), ("title",)]
+        self.repo2 = ViiteRepo(self.db2)
+
         # In memory db, koska Toukolle mockit liian vaikeita
         db = Database()
         db.create_table()
@@ -122,6 +129,26 @@ class TestHakuMock(unittest.TestCase):
         viite = self.repo.hae_viitteella("tuntematon")
         self.mock_db.hae_viite.assert_called_once_with("tuntematon")
         self.assertIsNone(viite)
+
+    # Tuple -> dict muunnoksen testit
+    def test_dict_kaytetaan_suoraan(self):
+        rows = [{"viite": "TEST123", "author": "Owner", "title": "otsake"}]
+        self.db2.hae_kaikki.return_value = rows
+        tulos = self.repo2.hae_viite_hakuehdoilla()
+        self.assertEqual(tulos, rows)
+ 
+    def test_tuple_muuntuu_dict(self):
+        rows = [("TEST345", "matti", "Otsake"), ("TEST678", "teppo", "Otsake2")]
+        self.db2.hae_kaikki.return_value = rows
+        tulos = self.repo2.hae_viite_hakuehdoilla()
+        self.assertEqual(tulos[0]["viite"], "TEST345")
+        self.assertEqual(tulos[0]["author"], "matti")
+        self.assertEqual(tulos[0]["title"], "Otsake")
+
+    def test_tyhjat_kentat_palauttaa_tyhjan(self):
+        self.db2.hae_kaikki.return_value = [{"viite": None, "author": None, "title": None}]
+        tulos = self.repo2.hae_viite_hakuehdoilla(author="author")
+        self.assertEqual(tulos, [])
 
     # Hakuehdoilla viitteen hakemisen testit
     def test_haku_authorilla(self):
