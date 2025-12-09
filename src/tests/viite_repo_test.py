@@ -53,6 +53,18 @@ class TestHakuMock(unittest.TestCase):
                 "volume": None,
                 "pages": None,
                 "publisher": None
+            },
+            {
+                "viite": "jkl",
+                "type": "article",
+                "author": "Matti Meikalainen",
+                "title": "Otsikko2",
+                "year": 2020,
+                "booktitle": "ISO OTSIKKO",
+                "journal": None,
+                "volume": None,
+                "pages": "89",
+                "publisher": "kotava"
             }
         ]
 
@@ -137,6 +149,20 @@ class TestHakuMock(unittest.TestCase):
 
     def test_palauttaa_tyhjan_jos_kentta_none(self):
         tulokset = self.repo.hae_viite_hakuehdoilla(journal=None)
+        self.assertEqual(tulokset, [])
+    
+    def test_haku_pidemmalla_merkkijonolla_lowercase(self):
+        tulokset = self.repo.hae_viite_hakuehdoilla(author = "matti meikalainen")
+        self.assertEqual(len(tulokset), 1)
+        self.assertTrue(tulokset[0]["viite"], "jkl")
+
+    def test_hae_viite_title_osuma(self):
+        tulokset = self.repo.hae_viite_hakuehdoilla(booktitle="otsikko")
+        self.assertEqual(len(tulokset), 1)
+        self.assertTrue(tulokset[0]["viite"], "jkl")
+
+    def test_ei_osumaa_publisher(self):
+        tulokset = self.repo.hae_viite_hakuehdoilla(publisher="olematon julkaisija")
         self.assertEqual(tulokset, [])
 
     # Kaikkien viitteiden listauksien testit

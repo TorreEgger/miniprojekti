@@ -71,8 +71,8 @@ class ViiteRepo:
                         match = False
                         break
                 
-                # Muille useamman kuin yhden sanan kentille
-                elif kentta in ("title", "booktitle", "publisher"):
+                # Muille useamman kuin yhden sanan kentille. Yksi merkkijonoon sisältyvä sana riittää myös.
+                elif kentta in ("title", "booktitle", "publisher", "journal", "pages"):
                     if arvo.lower() not in data_arvo.lower():
                         match = False
                         break
