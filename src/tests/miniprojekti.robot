@@ -27,3 +27,4 @@ Listaa Viitteet Virheinput
     Set User Inputs    listaa    a    poistu
     Run Application
     Output Should Contain    , mitään ei tulosteta
+
