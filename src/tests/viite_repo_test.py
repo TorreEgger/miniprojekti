@@ -200,6 +200,15 @@ class TestHakuMock(unittest.TestCase):
         tulos = self.repo.listaa_kaikki()
         self.assertEqual(tulos.strip(), "Tietokanta on tyhjä")
 
+
+    def test_listaa_kaikki_bibtex_muodossa_palauttaa_tyhjan_viestin_jos_ei_tuloksia(self):
+
+        self.mock_db.hae_kaikki.return_value = []
+
+        tulos = self.repo.listaa_kaikki_bibtex()
+        self.assertEqual(tulos.strip(), "Tietokanta on tyhjä")
+
+
     def test_viiteolion_saa_lisakentat(self):
         lisakentat = {
             "language": "English",
@@ -211,3 +220,22 @@ class TestHakuMock(unittest.TestCase):
         self.assertEqual(response, "Viite lisätty!")
         viite = self.db_repo.hae_viitteella("joku42")
         self.assertEqual(viite.lisakentat["language"], "English")
+
+    
+    def test_listaa_kaikki_saa_kentat(self):
+
+        self.mock_db.hae_kaikki.return_value = [self.testiviitteet[0]]
+        self.mock_db.hae_lisakentat.return_value = []
+        
+        testi_tulos = self.repo.listaa_kaikki()
+
+        odotetut_rivit = (
+            "Hakutulokset:\n\n"
+            "viite: abc\n"
+            "type: inproceedings\n"
+            "author: jaska\n"
+            "title: Otsikko1\n"
+            "year: 2023\n"
+        )
+
+        self.assertEqual(testi_tulos, odotetut_rivit)
