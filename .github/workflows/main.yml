@@ -30,5 +30,6 @@ jobs:
         uses: codecov/codecov-action@v4
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      - name: Run Robot Framework tests
-        run: poetry run robot --outputdir robot-results tests/miniprojekti.robot
+      - name: Run robot framework tests
+        run: poetry run robot --outputdir robot-results src
+        
