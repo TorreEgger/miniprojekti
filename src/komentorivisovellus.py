@@ -166,7 +166,7 @@ class Miniprojekti:
                         while i < len(osat) and "=" not in osat[i]:
                             arvo += " " + osat[i]
                             i += 1
-                        if kentta in ("author", "title", "booktitle", "publisher"):
+                        if kentta in ("author", "title", "booktitle", "publisher", "journal", "pages", "volume"):
                             hakuehdot[kentta] = arvo.lower()
                         else:
                             hakuehdot[kentta] = arvo
@@ -178,20 +178,22 @@ class Miniprojekti:
                     self._io.kirjoita("Ei hakuehtoja vastaavia viitteitä \n")
                     continue
 
+                pakolliset_kentat = ["viite", "type", "author", "title", "year"]
+
+
+                # Hakutulosten tulostaminen
                 self._io.kirjoita("\nHakutulokset:\n")
                 for viite in tulokset:
-                    self._io.kirjoita(f"ID: {viite['id']}")
-                    self._io.kirjoita(f"viite: {viite['viite']}")
-                    self._io.kirjoita(f"type: {viite['type']}")
-                    self._io.kirjoita(f"author: {viite['author']}")
-                    self._io.kirjoita(f"title: {viite['title']}")
-                    self._io.kirjoita(f"year: {viite['year']}")
-
-                    # Valinnaiset kentät:
-                    valinnaiset = ["booktitle", "journal", "volume", "pages", "publisher"]
-                    for k in valinnaiset:
-                        if viite[k]:
-                            self._io.kirjoita(f"{k.capitalize()}: {viite[k]}")
+                    for k in pakolliset_kentat:
+                        if k in viite and viite[k]:
+                            self._io.kirjoita(f"{k}: {viite[k]}")
+                    
+                    # Valinnaiset ja lisäkentät
+                    for k in sorted(viite.keys()):
+                        if k not in pakolliset_kentat:
+                            value = viite[k]
+                            if value:
+                                self._io.kirjoita(f"{k}: {value}")
                     self._io.kirjoita("")
                 continue
             
