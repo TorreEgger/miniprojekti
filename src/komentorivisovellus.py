@@ -139,8 +139,9 @@ class Miniprojekti:
 
             # Viitteen hakeminen viitteen nimellä tai hakuehtoja käyttäen
             if kasky.startswith("hae"):
-
-                if kasky.strip() =="hae":
+                pass
+            
+            elif kasky.strip() =="hae":
                     tunnus = self._io.lue("Syötä viite:")
                     viite = self.repo.hae_viitteella(tunnus)
 
@@ -152,7 +153,8 @@ class Miniprojekti:
                         self._io.kirjoita(viite.title)
                         self._io.kirjoita("")
                     continue
-
+            
+            else:
                 ehto_teksti = kasky[4:]
                 osat = ehto_teksti.split()
                 hakuehdot = {}
@@ -179,7 +181,6 @@ class Miniprojekti:
                     continue
 
                 pakolliset_kentat = ["viite", "type", "author", "title", "year"]
-
 
                 # Hakutulosten tulostaminen
                 self._io.kirjoita("\nHakutulokset:\n")
