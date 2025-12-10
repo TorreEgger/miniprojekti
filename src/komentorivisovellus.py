@@ -83,12 +83,17 @@ class Miniprojekti:
                     )
 
 
-                # Väliaikainen ratkaisu?
+                # mielivaltainen viite
                 if viitetyyppi not in ('inproceedings', 'article', 'book'):
-                    self._io.kirjoita("Valitse järkevä viitetyyppi")
-                    continue
+                    lisattava_viite = Viite(
+                        viite=viite,
+                        viitetyyppi=viitetyyppi,
+                        author=tekijä,
+                        title=otsikko,
+                        year=vuosi
+                    )
 
-
+                # jos vastaus muu kuin "y" --> yes, niin ei lisätä
                 tarviiko = self._io.lue("Tarvitsetko lisää kenttiä? (y/n)")
                 if tarviiko == "y":
                     while True:
