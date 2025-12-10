@@ -239,3 +239,27 @@ class TestHakuMock(unittest.TestCase):
         )
 
         self.assertEqual(testi_tulos, odotetut_rivit)
+
+
+    def test_listaa_laikki_valinnaisetkentat(self):
+        self.mock_db.hae_kaikki.return_value = [self.testiviitteet[3]]
+        self.mock_db.hae_lisakentat.return_value = []
+
+        testi_tulos = self.repo.listaa_kaikki()
+
+        odotetut_rivit = (
+            "Hakutulokset:\n\n"
+            "viite: jkl\n"
+            "type: article\n"
+            "author: Matti Meikalainen\n"
+            "title: Otsikko2\n"
+            "year: 2020\n"
+            "Booktitle: ISO OTSIKKO\n"
+            "Pages: 89\n"
+            "Publisher: kotava\n"
+        )
+
+
+        self.assertEqual(testi_tulos, odotetut_rivit)
+
+
