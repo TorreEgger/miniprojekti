@@ -15,9 +15,11 @@ class Miniprojekti:
         self._io = io
         self.repo = repo
 
+        
     def suorita(self):
         self._io.kirjoita("Kirjoita 'help' nähdäksesi annettavat käskyt")
         self._io.kirjoita("")
+
 
         while True:
             kasky = self._io.lue("Anna käsky: ")
@@ -25,16 +27,24 @@ class Miniprojekti:
             if kasky == "poistu":
                 break
     
+
             # Viitteiden lisääminen
             if kasky == "lisaa":
+                lisattava_viite = None
+                lisakentat = {}
                 self._io.kirjoita("")
+
+
+                #Kaikkien viitteiden tarvitsemat kentät (tähän tietoon)
                 viite = self._io.lue("Syötä viite:")          
                 viitetyyppi = self._io.lue("Syötä viitetyyppi:")
                 tekijä = self._io.lue("Syötä tekijä(t):")
                 otsikko = self._io.lue("Syötä otsikko:")
                 vuosi = self._io.lue("Syötä julkaisuvuosi:")
+
+                #Tehtävänannon esimerkkidatan perusteella kentät näihin kolmeen
                 if viitetyyppi == "inproceedings":
-                    booktitle = self._io.lue("Syötä otsikko:")
+                    booktitle = self._io.lue("Syötä kirjan otsikko:")
                     lisattava_viite = Viite(
                         viite=viite,
                         viitetyyppi=viitetyyppi,
@@ -43,8 +53,8 @@ class Miniprojekti:
                         booktitle=booktitle,
                         year=vuosi
                     )
-                    self.repo.database.lisaa_viiteolio(lisattava_viite)
-                    self._io.kirjoita("Viite lisätty!")
+
+
                 if viitetyyppi == "article":
                     volyymi = self._io.lue("Syötä volyymi:")
                     sivut = self._io.lue("Syötä sivumäärä:")
@@ -59,8 +69,8 @@ class Miniprojekti:
                         volume=volyymi,
                         pages=sivut
                     )
-                    self.repo.database.lisaa_viiteolio(lisattava_viite)
-                    self._io.kirjoita("Viite lisätty!")
+
+
                 if viitetyyppi == "book":
                     julkaisija = self._io.lue("Syötä julkaisija:")
                     lisattava_viite = Viite(
@@ -71,9 +81,29 @@ class Miniprojekti:
                         year=vuosi,
                         publisher=julkaisija
                     )
-                    self.repo.database.lisaa_viiteolio(lisattava_viite)
-                    self._io.kirjoita("Viite lisätty!")
+
+
+                # Väliaikainen ratkaisu?
+                if viitetyyppi not in ('inproceedings', 'article', 'book'):
+                    self._io.kirjoita("Valitse järkevä viitetyyppi")
+                    continue
+
+
+                tarviiko = self._io.lue("Tarvitsetko lisää kenttiä? (y/n)")
+                if tarviiko == "y":
+                    while True:
+                        uusi_kentta = self._io.lue("Uusi kenttä:")
+                        if uusi_kentta == "": #Jos uusi kenttä on tyhjä, silmukka päättyy
+                            break             # eli paina vaan enter kun haluat poistua. lisätään ohjeisiin
+                        kentan_arvo = self._io.lue("Kentän arvo:")
+                        lisakentat[uusi_kentta] = kentan_arvo
+
+
+                lisattava_viite.lisakentat = lisakentat
+                self.repo.database.lisaa_viiteolio(lisattava_viite)
+                self._io.kirjoita("Viite lisätty!")
                 continue
+
 
             # Tallennettujen viitteiden listaaminen
             if kasky == "listaa":

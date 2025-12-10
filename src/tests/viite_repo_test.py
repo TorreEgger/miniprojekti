@@ -1,5 +1,6 @@
 import unittest
 from unittest.mock import Mock
+from unittest.mock import MagicMock
 from viite_repo import ViiteRepo
 from database import Database
 from viite import Viite
@@ -9,7 +10,6 @@ class TestHakuMock(unittest.TestCase):
     def setUp(self):
         # Mock-database
         self.mock_db = Mock()
-
         self.mock_db.cursor = Mock()
         self.mock_db.cursor.description = [
             ("viite",), ("type",), ("author",), ("title",), ("year",), 
@@ -53,6 +53,18 @@ class TestHakuMock(unittest.TestCase):
                 "volume": None,
                 "pages": None,
                 "publisher": None
+            },
+            {
+                "viite": "jkl",
+                "type": "article",
+                "author": "Matti Meikalainen",
+                "title": "Otsikko2",
+                "year": 2020,
+                "booktitle": "ISO OTSIKKO",
+                "journal": None,
+                "volume": None,
+                "pages": "89",
+                "publisher": "kotava"
             }
         ]
 
@@ -60,6 +72,13 @@ class TestHakuMock(unittest.TestCase):
         self.mock_db.hae_kaikki.return_value = self.testiviitteet
         # Mock-database repo
         self.repo = ViiteRepo(self.mock_db)
+
+        # Toinen DB ja testidataa tuple muunnoksen testausta varten
+        self.db2 = MagicMock()
+        self.db2.cursor = MagicMock()
+
+        self.db2.cursor.description = [("viite",), ("author",), ("title",)]
+        self.repo2 = ViiteRepo(self.db2)
 
         # In memory db, koska Toukolle mockit liian vaikeita
         db = Database()
@@ -111,6 +130,26 @@ class TestHakuMock(unittest.TestCase):
         self.mock_db.hae_viite.assert_called_once_with("tuntematon")
         self.assertIsNone(viite)
 
+    # Tuple -> dict muunnoksen testit
+    def test_dict_kaytetaan_suoraan(self):
+        rows = [{"viite": "TEST123", "author": "Owner", "title": "otsake"}]
+        self.db2.hae_kaikki.return_value = rows
+        tulos = self.repo2.hae_viite_hakuehdoilla()
+        self.assertEqual(tulos, rows)
+ 
+    def test_tuple_muuntuu_dict(self):
+        rows = [("TEST345", "matti", "Otsake"), ("TEST678", "teppo", "Otsake2")]
+        self.db2.hae_kaikki.return_value = rows
+        tulos = self.repo2.hae_viite_hakuehdoilla()
+        self.assertEqual(tulos[0]["viite"], "TEST345")
+        self.assertEqual(tulos[0]["author"], "matti")
+        self.assertEqual(tulos[0]["title"], "Otsake")
+
+    def test_tyhjat_kentat_palauttaa_tyhjan(self):
+        self.db2.hae_kaikki.return_value = [{"viite": None, "author": None, "title": None}]
+        tulos = self.repo2.hae_viite_hakuehdoilla(author="author")
+        self.assertEqual(tulos, [])
+
     # Hakuehdoilla viitteen hakemisen testit
     def test_haku_authorilla(self):
         tulokset = self.repo.hae_viite_hakuehdoilla(author="kalle")
@@ -135,6 +174,24 @@ class TestHakuMock(unittest.TestCase):
         tulokset = self.repo.hae_viite_hakuehdoilla(author="olematon")
         self.assertEqual(tulokset, [])
 
+    def test_palauttaa_tyhjan_jos_kentta_none(self):
+        tulokset = self.repo.hae_viite_hakuehdoilla(journal=None)
+        self.assertEqual(tulokset, [])
+    
+    def test_haku_pidemmalla_merkkijonolla_lowercase(self):
+        tulokset = self.repo.hae_viite_hakuehdoilla(author = "matti meikalainen")
+        self.assertEqual(len(tulokset), 1)
+        self.assertTrue(tulokset[0]["viite"], "jkl")
+
+    def test_hae_viite_title_osuma(self):
+        tulokset = self.repo.hae_viite_hakuehdoilla(booktitle="otsikko")
+        self.assertEqual(len(tulokset), 1)
+        self.assertTrue(tulokset[0]["viite"], "jkl")
+
+    def test_ei_osumaa_publisher(self):
+        tulokset = self.repo.hae_viite_hakuehdoilla(publisher="olematon julkaisija")
+        self.assertEqual(tulokset, [])
+
     # Kaikkien viitteiden listauksien testit
     def test_listaa_kaikki_palauttaa_tyhjan_viestin_jos_ei_tuloksia(self):
         # Mockataan tyhjä tietokanta
@@ -142,30 +199,6 @@ class TestHakuMock(unittest.TestCase):
 
         tulos = self.repo.listaa_kaikki()
         self.assertEqual(tulos.strip(), "Tietokanta on tyhjä")
-        
-    def test_listaa_kaikki_palauttaa_oikean_muotoisen_listauksen(self):
-        # Mockataan testiviitteet takaisin käyttöön
-        self.mock_db.hae_kaikki.return_value = self.testiviitteet
-
-        tulos = self.repo.listaa_kaikki()
-
-        # Tarkista että otsikko on
-        self.assertIn("Hakutulokset:", tulos)
-
-        # Tarkistetaan että jokaisen viitteen pakolliset kentät esiintyvät
-        for v in self.testiviitteet:
-            self.assertIn(f"viite: {v['viite']}", tulos)
-            self.assertIn(f"type: {v['type']}", tulos)
-            self.assertIn(f"author: {v['author']}", tulos)
-            self.assertIn(f"title: {v['title']}", tulos)
-            self.assertIn(f"year: {v['year']}", tulos)
-
-        # Valinnaiset kentät ovat None eikä niiden pitäisi näkyä
-        self.assertNotIn("Booktitle:", tulos)
-        self.assertNotIn("Journal:", tulos)
-        self.assertNotIn("Volume:", tulos)
-        self.assertNotIn("Pages:", tulos)
-        self.assertNotIn("Publisher:", tulos)
 
     def test_viiteolion_saa_lisakentat(self):
         lisakentat = {

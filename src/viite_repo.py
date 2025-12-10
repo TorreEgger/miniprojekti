@@ -62,6 +62,8 @@ class ViiteRepo:
                 # Jos kenttä on None
                 if data_arvo is None:
                     data_arvo = ""
+                    match = False
+                    break
 
                 # Author-kentälle
                 if kentta == "author":
@@ -69,8 +71,8 @@ class ViiteRepo:
                         match = False
                         break
                 
-                # Muille useamman kuin yhden sanan kentille
-                elif kentta in ("title", "booktitle", "publisher"):
+                # Muille useamman kuin yhden sanan kentille. Yksi merkkijonoon sisältyvä sana riittää myös.
+                elif kentta in ("title", "booktitle", "publisher", "journal", "pages"):
                     if arvo.lower() not in data_arvo.lower():
                         match = False
                         break
@@ -148,6 +150,15 @@ class ViiteRepo:
             for k in valinnaiset:
                 if viite[k]:
                     rivit.append(f"{k.capitalize()}: {viite[k]}")
+            
+            lisakentat = self.database.hae_lisakentat(viite['viite'])
+
+            for row in lisakentat:
+                field = row["field"]
+                value = row["value"]
+                rivit.append(f"{field.capitalize()}: {value}")
+            
+            
             rivit.append("")
         
         return "\n".join(rivit)
