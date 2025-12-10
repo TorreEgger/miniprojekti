@@ -18,3 +18,6 @@ class StubDB:
     
     def hae_lisakentat(self, viite):
         return []
+
+    def poista_viite(self, viite):
+        return "Viite poistettu"
