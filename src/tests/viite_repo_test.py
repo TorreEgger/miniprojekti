@@ -226,6 +226,37 @@ class TestHakuMock(unittest.TestCase):
 
         # Varmistetaan, että lisäkenttien hakua kutsuttiin oikealla arvolla
         self.mock_db.hae_lisakentat.assert_called_once_with("abc")
+        
+    # Lisäkenttien tulostuksien testaus BibTeX-versio
+    def test_listaa_kaikki_tulostaa_viitteen_ja_lisakentat_bibtex(self):
+
+        self.mock_db.hae_kaikki.return_value = [self.testiviitteet[0]]
+        self.mock_db.hae_lisakentat.return_value = [
+            {"field": "Isbn", "value": "12345"},
+            {"field": "Editor", "value": "Veikko"}
+        ]
+
+        # Mockataan hae_viitteella palauttamaan samanlainen viiteolio koska käytetään viite-luokkaa
+        viiteolio = Viite(
+            "abc", "inproceedings", "jaska", "Otsikko1", 2023,
+            lisakentat={"Isbn":"12345", "Editor":"Veikko"}
+        )
+        self.repo.hae_viitteella = Mock(return_value=viiteolio)
+
+        testi_tulos = self.repo.listaa_kaikki_bibtex()
+
+        odotetut = (
+            "Hakutulokset BibTeX-muodossa:\n\n"
+            "@inproceedings{abc,\n"
+            "    author = {jaska},\n"
+            "    title = {Otsikko1},\n"
+            "    year = {2023},\n"
+            "    Isbn = {12345}\n"
+            "    Editor = {Veikko}\n"
+            "}\n"
+        )
+
+        self.assertEqual(testi_tulos, odotetut)
 
     def test_listaa_kaikki_bibtex_muodossa_palauttaa_tyhjan_viestin_jos_ei_tuloksia(self):
 
