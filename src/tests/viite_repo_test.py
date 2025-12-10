@@ -200,6 +200,32 @@ class TestHakuMock(unittest.TestCase):
         tulos = self.repo.listaa_kaikki()
         self.assertEqual(tulos.strip(), "Tietokanta on tyhjä")
 
+    # Lisäkenttien tulostuksien testaus
+    def test_listaa_kaikki_tulostaa_viitteen_ja_lisakentat(self):
+        
+        self.mock_db.hae_kaikki.return_value = [self.testiviitteet[0]]
+        self.mock_db.hae_lisakentat.return_value = [
+            {"field": "Isbn", "value": "12345"},
+            {"field": "Editor", "value": "Veikko"}
+        ]
+        
+        testi_tulos = self.repo.listaa_kaikki()
+
+        odotetut_rivit = (
+            "Hakutulokset:\n\n"
+            "viite: abc\n"
+            "type: inproceedings\n"
+            "author: jaska\n"
+            "title: Otsikko1\n"
+            "year: 2023\n"
+            "Isbn: 12345\n"
+            "Editor: Veikko\n"
+        )
+
+        self.assertEqual(testi_tulos, odotetut_rivit)
+
+        # Varmistetaan, että lisäkenttien hakua kutsuttiin oikealla arvolla
+        self.mock_db.hae_lisakentat.assert_called_once_with("abc")
 
     def test_listaa_kaikki_bibtex_muodossa_palauttaa_tyhjan_viestin_jos_ei_tuloksia(self):
 
