@@ -26,7 +26,8 @@ disable=raw-checker-failed,
         too-many-locals,
         C0103,
         E0401,
-        W0611
+        W0611,
+        R1705
 
 [FORMAT]
 
