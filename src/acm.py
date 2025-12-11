@@ -2,10 +2,9 @@
 # https://dl.acm.org/doi/10.5555/3721488.3721494
 # https://dl.acm.org/doi/10.1145/3711083
 
-from bs4 import BeautifulSoup
-import requests
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+from bs4 import BeautifulSoup # type: ignore
+from selenium import webdriver # type: ignore
+from selenium.webdriver.chrome.options import Options # type: ignore
 
 
 def acmhaku(acm):
