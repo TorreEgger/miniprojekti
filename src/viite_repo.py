@@ -41,14 +41,30 @@ class ViiteRepo:
     def hae_viite_hakuehdoilla(self, **hakuehdot):
         rows = self.database.hae_kaikki()
 
+        if not rows:
+            return []
+
         # Jos mock-datasta tulee dict-lista, käytetään sellaisenaan
         if isinstance(rows[0], dict):
             kaikki = rows
-
         else:
             # Muunna tuple -> dict käyttäen cursor.descriptionia
             columns = [col[0] for col in self.database.cursor.description]
             kaikki = [dict(zip(columns, row)) for row in rows]
+
+        # Haetaan lisäkenttien tiedot ja muunnetaan ne dict muotoisiksi hakuehdoiksi
+        for viite in kaikki:
+            viite_id = viite.get("viite")
+            lisarivit = self.database.hae_lisakentat(viite_id)
+
+            if not isinstance(lisarivit, (list, tuple)):
+                lisarivit = []
+
+            for rivi in lisarivit:
+                if len(rivi) >= 3:
+                    field = rivi[1]
+                    value = rivi[2]
+                    viite[field] = value
 
         tulokset = []
 
@@ -107,6 +123,7 @@ class ViiteRepo:
 
     def lisaa_viite(self, viite: Viite):
 
+        # pakolliset ja mahdolliset kentät
         viitetiedot = {
             "viite": viite.viite,
             "type": viite.viitetyyppi,
@@ -129,6 +146,7 @@ class ViiteRepo:
             return 'lisäys ei onnistunut'
         return 'lisäys onnistui'
 
+    # Tulostaa kaikki viitteet ihmiselle luettavassa muodossa
     def listaa_kaikki(self):
         tulokset = self.database.hae_kaikki()
         if not tulokset:
@@ -151,6 +169,7 @@ class ViiteRepo:
                 if viite[k]:
                     rivit.append(f"{k.capitalize()}: {viite[k]}")
             
+            # Lisäkentät:
             lisakentat = self.database.hae_lisakentat(viite['viite'])
 
             for row in lisakentat:
@@ -163,6 +182,7 @@ class ViiteRepo:
         
         return "\n".join(rivit)
     
+    # Tulostaa kaikki viitteet BibTex-muodossa
     def listaa_kaikki_bibtex(self):
         tulokset = self.database.hae_kaikki()
 

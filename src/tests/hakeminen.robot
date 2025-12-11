@@ -1,4 +1,4 @@
-# Robot testitiedosto hakutoiminnon testaamiseen
+#Robot testitiedosto hakutoiminnon testaamiseen
 
 *** Settings ***
 Library    ../HakuLibrary.py

@@ -192,6 +192,40 @@ class TestHakuMock(unittest.TestCase):
         tulokset = self.repo.hae_viite_hakuehdoilla(publisher="olematon julkaisija")
         self.assertEqual(tulokset, [])
 
+    def test_paluttaa_tyhjan_kun_ei_riveja(self):
+        self.mock_db.hae_kaikki.return_value = []
+        repo = ViiteRepo(self.mock_db)
+        tulokset = repo.hae_viite_hakuehdoilla()
+        self.assertEqual(tulokset, [])
+
+    def test_hae_viite_hakuehdoilla_lisaa_lisakentat(self):
+        self.mock_db.hae_kaikki.return_value = [
+            ("ABC", "article", "Matti", "Otsikko", 2024, None, None, None, None, None)
+        ]
+        self.mock_db.hae_lisakentat.return_value = [
+            ("ABC", "lisa1", "value1"),
+            ("ABC", "lisa2", "value2")
+        ]
+        tulos = self.repo.hae_viite_hakuehdoilla()
+        self.assertTrue(len(tulos) > 0)
+        viite = tulos[0]
+        self.assertIn("lisa1", viite)
+        self.assertEqual(viite["lisa1"], "value1")
+        self.assertIn("lisa2", viite)
+        self.assertEqual(viite["lisa2"], "value2")
+
+    def test_huono_lisarivi_ei_muuta_dictia(self):
+        self.mock_db.hae_kaikki.return_value = [
+            {"viite": "v1", "type": "article", "author": "A", "title": "T", "year": 2023}
+        ]
+        # Lisäkenttä, jonka pituus < 3
+        self.mock_db.hae_lisakentat.return_value = [
+            ("v1",),          
+            ("v1", "field"),  
+        ]
+        tulokset = self.repo.hae_viite_hakuehdoilla()
+        self.assertNotIn("field", tulokset[0])
+
     # Kaikkien viitteiden listauksien testit
     def test_listaa_kaikki_palauttaa_tyhjan_viestin_jos_ei_tuloksia(self):
         # Mockataan tyhjä tietokanta
@@ -199,6 +233,72 @@ class TestHakuMock(unittest.TestCase):
 
         tulos = self.repo.listaa_kaikki()
         self.assertEqual(tulos.strip(), "Tietokanta on tyhjä")
+
+    # Lisäkenttien tulostuksien testaus
+    def test_listaa_kaikki_tulostaa_viitteen_ja_lisakentat(self):
+        
+        self.mock_db.hae_kaikki.return_value = [self.testiviitteet[0]]
+        self.mock_db.hae_lisakentat.return_value = [
+            {"field": "Isbn", "value": "12345"},
+            {"field": "Editor", "value": "Veikko"}
+        ]
+        
+        testi_tulos = self.repo.listaa_kaikki()
+
+        odotetut_rivit = (
+            "Hakutulokset:\n\n"
+            "viite: abc\n"
+            "type: inproceedings\n"
+            "author: jaska\n"
+            "title: Otsikko1\n"
+            "year: 2023\n"
+            "Isbn: 12345\n"
+            "Editor: Veikko\n"
+        )
+
+        self.assertEqual(testi_tulos, odotetut_rivit)
+
+        # Varmistetaan, että lisäkenttien hakua kutsuttiin oikealla arvolla
+        self.mock_db.hae_lisakentat.assert_called_once_with("abc")
+        
+    # Lisäkenttien tulostuksien testaus BibTeX-versio
+    def test_listaa_kaikki_tulostaa_viitteen_ja_lisakentat_bibtex(self):
+
+        self.mock_db.hae_kaikki.return_value = [self.testiviitteet[0]]
+        self.mock_db.hae_lisakentat.return_value = [
+            {"field": "Isbn", "value": "12345"},
+            {"field": "Editor", "value": "Veikko"}
+        ]
+
+        # Mockataan hae_viitteella palauttamaan samanlainen viiteolio koska käytetään viite-luokkaa
+        viiteolio = Viite(
+            "abc", "inproceedings", "jaska", "Otsikko1", 2023,
+            lisakentat={"Isbn":"12345", "Editor":"Veikko"}
+        )
+        self.repo.hae_viitteella = Mock(return_value=viiteolio)
+
+        testi_tulos = self.repo.listaa_kaikki_bibtex()
+
+        odotetut = (
+            "Hakutulokset BibTeX-muodossa:\n\n"
+            "@inproceedings{abc,\n"
+            "    author = {jaska},\n"
+            "    title = {Otsikko1},\n"
+            "    year = {2023},\n"
+            "    Isbn = {12345}\n"
+            "    Editor = {Veikko}\n"
+            "}\n"
+        )
+
+        self.assertEqual(testi_tulos, odotetut)
+
+    def test_listaa_kaikki_bibtex_muodossa_palauttaa_tyhjan_viestin_jos_ei_tuloksia(self):
+
+        self.mock_db.hae_kaikki.return_value = []
+
+        tulos = self.repo.listaa_kaikki_bibtex()
+        self.assertEqual(tulos.strip(), "Tietokanta on tyhjä")
+
 
     def test_viiteolion_saa_lisakentat(self):
         lisakentat = {
@@ -211,3 +311,46 @@ class TestHakuMock(unittest.TestCase):
         self.assertEqual(response, "Viite lisätty!")
         viite = self.db_repo.hae_viitteella("joku42")
         self.assertEqual(viite.lisakentat["language"], "English")
+
+    
+    def test_listaa_kaikki_saa_kentat(self):
+
+        self.mock_db.hae_kaikki.return_value = [self.testiviitteet[0]]
+        self.mock_db.hae_lisakentat.return_value = []
+        
+        testi_tulos = self.repo.listaa_kaikki()
+
+        odotetut_rivit = (
+            "Hakutulokset:\n\n"
+            "viite: abc\n"
+            "type: inproceedings\n"
+            "author: jaska\n"
+            "title: Otsikko1\n"
+            "year: 2023\n"
+        )
+
+        self.assertEqual(testi_tulos, odotetut_rivit)
+
+
+    def test_listaa_laikki_valinnaisetkentat(self):
+        self.mock_db.hae_kaikki.return_value = [self.testiviitteet[3]]
+        self.mock_db.hae_lisakentat.return_value = []
+
+        testi_tulos = self.repo.listaa_kaikki()
+
+        odotetut_rivit = (
+            "Hakutulokset:\n\n"
+            "viite: jkl\n"
+            "type: article\n"
+            "author: Matti Meikalainen\n"
+            "title: Otsikko2\n"
+            "year: 2020\n"
+            "Booktitle: ISO OTSIKKO\n"
+            "Pages: 89\n"
+            "Publisher: kotava\n"
+        )
+
+
+        self.assertEqual(testi_tulos, odotetut_rivit)
+
+

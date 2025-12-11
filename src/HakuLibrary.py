@@ -47,7 +47,7 @@ class HakuLibrary:
                 "journal": None,
                 "volume": None,
                 "pages": None,
-                "publisher": None
+                "publisher": None,
             },
             {
                 "id":"4",
@@ -62,7 +62,12 @@ class HakuLibrary:
                 "pages": None,
                 "publisher": None
             }
-        ])
+        ],
+        lisakentat={
+            "ccc": [
+                {"field": "editor", "value": "Veikko"}
+            ]
+        })
         self.io = StubIO()
         self.repo = ViiteRepo(db)
         self.app = Miniprojekti(self.io, self.repo)

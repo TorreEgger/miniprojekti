@@ -84,16 +84,21 @@ class Miniprojekti:
                     )
 
 
-                # Väliaikainen ratkaisu?
+                # mielivaltainen viite
                 if viitetyyppi not in ('inproceedings', 'article', 'book'):
-                    self._io.kirjoita("Valitse järkevä viitetyyppi")
-                    continue
+                    lisattava_viite = Viite(
+                        viite=viite,
+                        viitetyyppi=viitetyyppi,
+                        author=tekijä,
+                        title=otsikko,
+                        year=vuosi
+                    )
 
-
+                # jos vastaus muu kuin "y" --> yes, niin ei lisätä
                 tarviiko = self._io.lue("Tarvitsetko lisää kenttiä? (y/n)")
                 if tarviiko == "y":
                     while True:
-                        uusi_kentta = self._io.lue("Uusi kenttä:")
+                        uusi_kentta = self._io.lue("Uusi kenttä: (jos haluat keskeyttää paina vaan enter)")
                         if uusi_kentta == "": #Jos uusi kenttä on tyhjä, silmukka päättyy
                             break             # eli paina vaan enter kun haluat poistua. lisätään ohjeisiin
                         kentan_arvo = self._io.lue("Kentän arvo:")
@@ -135,62 +140,13 @@ class Miniprojekti:
 
             # Viitteen hakeminen viitteen nimellä tai hakuehtoja käyttäen
             if kasky.startswith("hae"):
-
-                if kasky.strip() =="hae":
-                    tunnus = self._io.lue("Syötä viite:")
-                    viite = self.repo.hae_viitteella(tunnus)
-
-                    if not viite:
-                        self._io.kirjoita("Viitettä ei löytynyt")
-                    else:
-                        self._io.kirjoita("")
-                        self._io.kirjoita(viite.viite)
-                        self._io.kirjoita(viite.title)
-                        self._io.kirjoita("")
-                    continue
-
-                ehto_teksti = kasky[4:]
-                osat = ehto_teksti.split()
-                hakuehdot = {}
-                i = 0
-
-                while i < len(osat):
-                    osa = osat[i]
-                    if "=" in osa:
-                        kentta, arvo = osa.split("=", 1)
-                        i += 1
-                        while i < len(osat) and "=" not in osat[i]:
-                            arvo += " " + osat[i]
-                            i += 1
-                        if kentta in ("author", "title", "booktitle", "publisher"):
-                            hakuehdot[kentta] = arvo.lower()
-                        else:
-                            hakuehdot[kentta] = arvo
-                        continue
-                    i += 1
-
-                tulokset = self.repo.hae_viite_hakuehdoilla(**hakuehdot)
-                if not tulokset:
-                    self._io.kirjoita("Ei hakuehtoja vastaavia viitteitä \n")
-                    continue
-
-                self._io.kirjoita("\nHakutulokset:\n")
-                for viite in tulokset:
-                    self._io.kirjoita(f"ID: {viite['id']}")
-                    self._io.kirjoita(f"viite: {viite['viite']}")
-                    self._io.kirjoita(f"type: {viite['type']}")
-                    self._io.kirjoita(f"author: {viite['author']}")
-                    self._io.kirjoita(f"title: {viite['title']}")
-                    self._io.kirjoita(f"year: {viite['year']}")
-
-                    # Valinnaiset kentät:
-                    valinnaiset = ["booktitle", "journal", "volume", "pages", "publisher"]
-                    for k in valinnaiset:
-                        if viite[k]:
-                            self._io.kirjoita(f"{k.capitalize()}: {viite[k]}")
-                    self._io.kirjoita("")
+                self.kasittele_haku(kasky)
                 continue
 
+<<<<<<< HEAD
+=======
+            
+>>>>>>> 08f37241ac81280262f33a8842f369fea0d29fda
             # ACM-tietokannasta viitteen tiedot
             if kasky in {'acm', 'ACM'}:
                 lisattava_viite = None
@@ -264,6 +220,62 @@ class Miniprojekti:
                 self._io.kirjoita("")
                 self._io.kirjoita("Anna kunnollinen käsky.")
                 self._io.kirjoita("")
+
+    def kasittele_haku(self, kasky):
+        # Jos haetaan yksittäistä viitettä
+        if kasky.strip() == "hae":
+            tunnus = self._io.lue("Syötä viite:")
+            viite = self.repo.hae_viitteella(tunnus)
+
+            if not viite:
+                self._io.kirjoita("Viitettä ei löytynyt")
+            else:
+                self._io.kirjoita("")
+                self._io.kirjoita(viite.viite)
+                self._io.kirjoita(viite.title)
+                self._io.kirjoita("")
+            return
+
+        # Monimutkaiset hakuehdot
+        ehto_teksti = kasky[4:]
+        osat = ehto_teksti.split()
+        hakuehdot = {}
+        i = 0
+
+        while i < len(osat):
+            osa = osat[i]
+            if "=" in osa:
+                kentta, arvo = osa.split("=", 1)
+                i += 1
+                while i < len(osat) and "=" not in osat[i]:
+                    arvo += " " + osat[i]
+                    i += 1
+                if kentta in ("author", "title", "booktitle", "publisher",
+                                "journal", "pages", "volume"):
+                    hakuehdot[kentta] = arvo.lower()
+                else:
+                    hakuehdot[kentta] = arvo
+                continue
+            i += 1
+
+        # Hakutulosten käsittely
+        tulokset = self.repo.hae_viite_hakuehdoilla(**hakuehdot)
+        if not tulokset:
+            self._io.kirjoita("Ei hakuehtoja vastaavia viitteitä \n")
+            return
+
+        pakolliset_kentat = ["viite", "type", "author", "title", "year"]
+
+        self._io.kirjoita("\nHakutulokset:\n")
+        for viite in tulokset:
+            for k in pakolliset_kentat:
+                if k in viite and viite[k]:
+                    self._io.kirjoita(f"{k}: {viite[k]}")
+
+            for k in sorted(viite.keys()):
+                if k not in pakolliset_kentat and viite[k]:
+                    self._io.kirjoita(f"{k}: {viite[k]}")
+            self._io.kirjoita("")
 
 def main():
     io = KonsoliIO()
