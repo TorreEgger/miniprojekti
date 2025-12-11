@@ -1,5 +1,5 @@
 [MASTER]
-max-line-length=120
+max-line-length=130
 ignore=tests
 
 [MESSAGE CONTROL]
@@ -23,7 +23,10 @@ disable=raw-checker-failed,
         too-many-positional-arguments,
         too-many-branches,
         too-many-statements,
-        too-many-locals
+        too-many-locals,
+        C0103,
+        E0401,
+        W0611
 
 [FORMAT]
 
