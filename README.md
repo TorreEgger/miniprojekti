@@ -11,7 +11,7 @@ Projektin backlog: https://jyu-my.sharepoint.com/:x:/g/personal/kirskaxt_jyu_fi/
 Jotta voimme määrittää jonkun vaatimuksen olevan valmis, seuraamme seuraavaa listausta:
 * Se on suunniteltu tarkoin. Tarkoittaen, että se on sirpaloitu eri tehtäviksi ja sen olemassaolo on tärkeää koko ohjelmalle.
 * Ohjelmakoodi: Koodi on selkeää, nimeämiskäytänteen mukaista ja Pylint ei anna virheilmoituksia.
-* Testaus: Ohjelmakoodia on testattu yksikkötesteillä (ja ne menevät läpi) sekä myöskin automatisoiduilla testeillä (nekin menevät läpi).
+* Testaus: Ohjelmakoodia on testattu yksikkötesteillä ja Robot-frameworkin avulla. Kummatkin suoritetaan myös CI:n toimesta.
 * Dokumentaatio: Kirjoitetut toiminnallisuudet on oltava dokumentoitu selkeästi, jotta muutkin kuin kirjoittaja(t) pystyvät sitä ymmärtämään.
 * Integraatio: Toiminallisuuksien tulee olla integroitu ohjelmistoon ja ne eivät saa olla ristiriidassa keskenään.
 * Tuotantoon vieminen: Lopuksi koodi tulee viedä säilöön! Jos toteutusta on tehty eri haarassa kuin (main/master), niin tulee tehdä merge näiden eri haarojen välille.
