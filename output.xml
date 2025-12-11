@@ -1,83 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.2 (Python 3.12.4 on darwin)" generated="2025-12-11T15:06:49.522242" rpa="false" schemaversion="5">
-<suite id="s1" name="Tests" source="/Users/noorapura/Documents/kurssit/ohjelmistotuotanto/miniprojekti/miniprojekti/src/tests">
-<suite id="s1-s1" name="Hakeminen" source="/Users/noorapura/Documents/kurssit/ohjelmistotuotanto/miniprojekti/miniprojekti/src/tests/hakeminen.robot">
+<robot generator="Robot 7.3.2 (Python 3.14.0 on win32)" generated="2025-12-11T23:22:22.746511" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="C:\Users\kakez\Git\prokkis\miniprojekti\src\tests">
+<suite id="s1-s1" name="Hakeminen" source="C:\Users\kakez\Git\prokkis\miniprojekti\src\tests\hakeminen.robot">
 <test id="s1-s1-t1" name="Käyttäjä Voi Filtteröidä Yhden Hakuehdon Perusteella" line="8">
 <kw name="Create Test Env" owner="HakuLibrary">
-<status status="PASS" start="2025-12-11T15:06:49.570169" elapsed="0.000177"/>
+<status status="PASS" start="2025-12-11T23:22:23.831501" elapsed="0.000114"/>
 </kw>
 <kw name="Set User Inputs" owner="HakuLibrary">
 <arg>hae year=2021</arg>
 <arg>poistu</arg>
-<status status="PASS" start="2025-12-11T15:06:49.570943" elapsed="0.000160"/>
+<status status="PASS" start="2025-12-11T23:22:23.831752" elapsed="0.000092"/>
 </kw>
 <kw name="Run Application" owner="HakuLibrary">
-<status status="PASS" start="2025-12-11T15:06:49.571256" elapsed="0.000147"/>
+<status status="PASS" start="2025-12-11T23:22:23.831947" elapsed="0.000077"/>
 </kw>
 <kw name="Output Should Contain" owner="HakuLibrary">
 <arg>ccc</arg>
-<status status="PASS" start="2025-12-11T15:06:49.571526" elapsed="0.000112"/>
+<status status="PASS" start="2025-12-11T23:22:23.832103" elapsed="0.000051"/>
 </kw>
 <kw name="Output Should Contain" owner="HakuLibrary">
 <arg>ddd</arg>
-<status status="PASS" start="2025-12-11T15:06:49.571759" elapsed="0.000105"/>
+<status status="PASS" start="2025-12-11T23:22:23.832232" elapsed="0.000048"/>
 </kw>
 <kw name="Output Should Not Contain" owner="HakuLibrary">
 <arg>aaa</arg>
-<status status="PASS" start="2025-12-11T15:06:49.571980" elapsed="0.000101"/>
+<status status="PASS" start="2025-12-11T23:22:23.832348" elapsed="0.000039"/>
 </kw>
 <kw name="Output Should Not Contain" owner="HakuLibrary">
 <arg>bbb</arg>
-<status status="PASS" start="2025-12-11T15:06:49.572196" elapsed="0.000093"/>
+<status status="PASS" start="2025-12-11T23:22:23.832453" elapsed="0.000038"/>
 </kw>
-<status status="PASS" start="2025-12-11T15:06:49.569203" elapsed="0.003226"/>
+<status status="PASS" start="2025-12-11T23:22:23.830921" elapsed="0.001656"/>
 </test>
 <test id="s1-s1-t2" name="Käyttäjä Voi Filtteröidä Useamman Hakuehdon Perusteella" line="17">
 <kw name="Create Test Env" owner="HakuLibrary">
-<status status="PASS" start="2025-12-11T15:06:49.573052" elapsed="0.000114"/>
+<status status="PASS" start="2025-12-11T23:22:23.832987" elapsed="0.000047"/>
 </kw>
 <kw name="Set User Inputs" owner="HakuLibrary">
 <arg>hae author=kalle year=2022</arg>
 <arg>poistu</arg>
-<status status="PASS" start="2025-12-11T15:06:49.573277" elapsed="0.000116"/>
+<status status="PASS" start="2025-12-11T23:22:23.833103" elapsed="0.000047"/>
 </kw>
 <kw name="Run Application" owner="HakuLibrary">
-<status status="PASS" start="2025-12-11T15:06:49.573508" elapsed="0.000125"/>
+<status status="PASS" start="2025-12-11T23:22:23.833219" elapsed="0.000047"/>
 </kw>
 <kw name="Output Should Contain" owner="HakuLibrary">
 <arg>bbb</arg>
-<status status="PASS" start="2025-12-11T15:06:49.573742" elapsed="0.000096"/>
+<status status="PASS" start="2025-12-11T23:22:23.833329" elapsed="0.000194"/>
 </kw>
 <kw name="Output Should Not Contain" owner="HakuLibrary">
 <arg>ddd</arg>
-<status status="PASS" start="2025-12-11T15:06:49.573949" elapsed="0.000099"/>
+<status status="PASS" start="2025-12-11T23:22:23.833598" elapsed="0.000038"/>
 </kw>
-<status status="PASS" start="2025-12-11T15:06:49.572668" elapsed="0.001515"/>
+<status status="PASS" start="2025-12-11T23:22:23.832795" elapsed="0.001050"/>
 </test>
 <test id="s1-s1-t3" name="Käyttäjä Ei Saa Tuloksia Jos Ei Löydy Vastaavia Viitteitä" line="24">
 <kw name="Create Test Env" owner="HakuLibrary">
-<status status="PASS" start="2025-12-11T15:06:49.574768" elapsed="0.000112"/>
+<status status="PASS" start="2025-12-11T23:22:23.834335" elapsed="0.000065"/>
 </kw>
 <kw name="Set User Inputs" owner="HakuLibrary">
 <arg>hae author=olavi</arg>
 <arg>poistu</arg>
-<status status="PASS" start="2025-12-11T15:06:49.574988" elapsed="0.000107"/>
+<status status="PASS" start="2025-12-11T23:22:23.834494" elapsed="0.000062"/>
 </kw>
 <kw name="Run Application" owner="HakuLibrary">
-<status status="PASS" start="2025-12-11T15:06:49.575207" elapsed="0.000106"/>
+<status status="PASS" start="2025-12-11T23:22:23.834681" elapsed="0.000076"/>
 </kw>
 <kw name="Output Should Contain" owner="HakuLibrary">
 <arg>Ei hakuehtoja vastaavia viitteitä</arg>
-<status status="PASS" start="2025-12-11T15:06:49.575419" elapsed="0.000095"/>
+<status status="PASS" start="2025-12-11T23:22:23.834871" elapsed="0.000055"/>
 </kw>
-<status status="PASS" start="2025-12-11T15:06:49.574398" elapsed="0.001243"/>
+<status status="PASS" start="2025-12-11T23:22:23.834090" elapsed="0.000929"/>
 </test>
-<status status="PASS" start="2025-12-11T15:06:49.559238" elapsed="0.016802"/>
+<status status="PASS" start="2025-12-11T23:22:22.763129" elapsed="1.072208"/>
 </suite>
-<suite id="s1-s2" name="Lisaaminen" source="/Users/noorapura/Documents/kurssit/ohjelmistotuotanto/miniprojekti/miniprojekti/src/tests/lisaaminen.robot">
+<suite id="s1-s2" name="Lisaaminen" source="C:\Users\kakez\Git\prokkis\miniprojekti\src\tests\lisaaminen.robot">
 <test id="s1-s2-t1" name="Käyttäjä voi lisätä viitteen tietokantaan" line="8">
 <kw name="Create Test Env" owner="HakuLibrary">
-<status status="PASS" start="2025-12-11T15:06:49.578308" elapsed="0.000112"/>
+<status status="PASS" start="2025-12-11T23:22:23.837142" elapsed="0.000066"/>
 </kw>
 <kw name="Set User Inputs" owner="HakuLibrary">
 <arg>lisaa</arg>
@@ -88,141 +88,141 @@
 <arg>2010</arg>
 <arg>n</arg>
 <arg>poistu</arg>
-<status status="PASS" start="2025-12-11T15:06:49.578533" elapsed="0.000130"/>
+<status status="PASS" start="2025-12-11T23:22:23.837303" elapsed="0.000066"/>
 </kw>
 <kw name="Run Application" owner="HakuLibrary">
-<status status="PASS" start="2025-12-11T15:06:49.578798" elapsed="0.000101"/>
+<status status="PASS" start="2025-12-11T23:22:23.837467" elapsed="0.000050"/>
 </kw>
 <kw name="Output Should Contain" owner="HakuLibrary">
 <arg>Viite lisätty!</arg>
-<status status="PASS" start="2025-12-11T15:06:49.579007" elapsed="0.000102"/>
+<status status="PASS" start="2025-12-11T23:22:23.837588" elapsed="0.000047"/>
 </kw>
-<status status="PASS" start="2025-12-11T15:06:49.577948" elapsed="0.001286"/>
+<status status="PASS" start="2025-12-11T23:22:23.836946" elapsed="0.000781"/>
 </test>
-<status status="PASS" start="2025-12-11T15:06:49.576486" elapsed="0.003011"/>
+<status status="PASS" start="2025-12-11T23:22:23.835672" elapsed="0.002258"/>
 </suite>
-<suite id="s1-s3" name="Listaaminen" source="/Users/noorapura/Documents/kurssit/ohjelmistotuotanto/miniprojekti/miniprojekti/src/tests/listaaminen.robot">
+<suite id="s1-s3" name="Listaaminen" source="C:\Users\kakez\Git\prokkis\miniprojekti\src\tests\listaaminen.robot">
 <test id="s1-s3-t1" name="Listaa Viitteet BibTeX-Muodossa" line="10">
 <kw name="Create Test Env" owner="HakuLibrary">
-<status status="PASS" start="2025-12-11T15:06:49.581745" elapsed="0.000110"/>
+<status status="PASS" start="2025-12-11T23:22:23.839456" elapsed="0.000067"/>
 </kw>
 <kw name="Set User Inputs" owner="HakuLibrary">
 <arg>listaa</arg>
 <arg>y</arg>
 <arg>poistu</arg>
-<status status="PASS" start="2025-12-11T15:06:49.581970" elapsed="0.000105"/>
+<status status="PASS" start="2025-12-11T23:22:23.839641" elapsed="0.000068"/>
 </kw>
 <kw name="Run Application" owner="HakuLibrary">
-<status status="PASS" start="2025-12-11T15:06:49.582193" elapsed="0.000134"/>
+<status status="PASS" start="2025-12-11T23:22:23.839806" elapsed="0.000072"/>
 </kw>
 <kw name="Output Should Contain" owner="HakuLibrary">
 <arg>@inproceedings{ccc</arg>
-<status status="PASS" start="2025-12-11T15:06:49.582436" elapsed="0.000099"/>
+<status status="PASS" start="2025-12-11T23:22:23.839963" elapsed="0.000063"/>
 </kw>
 <kw name="Output Should Contain" owner="HakuLibrary">
 <arg>author = {Matti}</arg>
-<status status="PASS" start="2025-12-11T15:06:49.582644" elapsed="0.000106"/>
+<status status="PASS" start="2025-12-11T23:22:23.840137" elapsed="0.000073"/>
 </kw>
 <kw name="Output Should Contain" owner="HakuLibrary">
 <arg>title = {TestiY}</arg>
-<status status="PASS" start="2025-12-11T15:06:49.582875" elapsed="0.000104"/>
+<status status="PASS" start="2025-12-11T23:22:23.840308" elapsed="0.000057"/>
 </kw>
 <kw name="Output Should Contain" owner="HakuLibrary">
 <arg>editor = {Veikko}</arg>
-<status status="PASS" start="2025-12-11T15:06:49.583091" elapsed="0.000105"/>
+<status status="PASS" start="2025-12-11T23:22:23.840448" elapsed="0.000052"/>
 </kw>
-<status status="PASS" start="2025-12-11T15:06:49.581414" elapsed="0.001907"/>
+<status status="PASS" start="2025-12-11T23:22:23.839222" elapsed="0.001370"/>
 </test>
 <test id="s1-s3-t2" name="Listaa Viitteet Normaali" line="19">
 <kw name="Create Test Env" owner="HakuLibrary">
-<status status="PASS" start="2025-12-11T15:06:49.583810" elapsed="0.000104"/>
+<status status="PASS" start="2025-12-11T23:22:23.840970" elapsed="0.000071"/>
 </kw>
 <kw name="Set User Inputs" owner="HakuLibrary">
 <arg>listaa</arg>
 <arg>n</arg>
 <arg>poistu</arg>
-<status status="PASS" start="2025-12-11T15:06:49.584019" elapsed="0.000101"/>
+<status status="PASS" start="2025-12-11T23:22:23.841116" elapsed="0.000045"/>
 </kw>
 <kw name="Run Application" owner="HakuLibrary">
-<status status="PASS" start="2025-12-11T15:06:49.584239" elapsed="0.000125"/>
+<status status="PASS" start="2025-12-11T23:22:23.841233" elapsed="0.000047"/>
 </kw>
 <kw name="Output Should Contain" owner="HakuLibrary">
 <arg>viite: ccc</arg>
-<status status="PASS" start="2025-12-11T15:06:49.584470" elapsed="0.000092"/>
+<status status="PASS" start="2025-12-11T23:22:23.841344" elapsed="0.000037"/>
 </kw>
 <kw name="Output Should Contain" owner="HakuLibrary">
 <arg>author: Matti</arg>
-<status status="PASS" start="2025-12-11T15:06:49.584669" elapsed="0.000089"/>
+<status status="PASS" start="2025-12-11T23:22:23.841446" elapsed="0.000036"/>
 </kw>
 <kw name="Output Should Contain" owner="HakuLibrary">
 <arg>Editor: Veikko</arg>
-<status status="PASS" start="2025-12-11T15:06:49.584864" elapsed="0.000089"/>
+<status status="PASS" start="2025-12-11T23:22:23.841546" elapsed="0.000036"/>
 </kw>
-<status status="PASS" start="2025-12-11T15:06:49.583523" elapsed="0.001550"/>
+<status status="PASS" start="2025-12-11T23:22:23.840813" elapsed="0.000844"/>
 </test>
 <test id="s1-s3-t3" name="Listaa Viitteet Virheinput" line="27">
 <kw name="Create Test Env" owner="HakuLibrary">
-<status status="PASS" start="2025-12-11T15:06:49.585558" elapsed="0.000104"/>
+<status status="PASS" start="2025-12-11T23:22:23.841986" elapsed="0.000046"/>
 </kw>
 <kw name="Set User Inputs" owner="HakuLibrary">
 <arg>listaa</arg>
 <arg>a</arg>
 <arg>poistu</arg>
-<status status="PASS" start="2025-12-11T15:06:49.585767" elapsed="0.000100"/>
+<status status="PASS" start="2025-12-11T23:22:23.842095" elapsed="0.000042"/>
 </kw>
 <kw name="Run Application" owner="HakuLibrary">
-<status status="PASS" start="2025-12-11T15:06:49.585979" elapsed="0.000091"/>
+<status status="PASS" start="2025-12-11T23:22:23.842206" elapsed="0.000035"/>
 </kw>
 <kw name="Output Should Contain" owner="HakuLibrary">
 <arg>, mitään ei tulosteta</arg>
-<status status="PASS" start="2025-12-11T15:06:49.586176" elapsed="0.000092"/>
+<status status="PASS" start="2025-12-11T23:22:23.842303" elapsed="0.000036"/>
 </kw>
-<status status="PASS" start="2025-12-11T15:06:49.585270" elapsed="0.001119"/>
+<status status="PASS" start="2025-12-11T23:22:23.841838" elapsed="0.000575"/>
 </test>
-<status status="PASS" start="2025-12-11T15:06:49.579901" elapsed="0.006750"/>
+<status status="PASS" start="2025-12-11T23:22:23.838185" elapsed="0.004432"/>
 </suite>
-<suite id="s1-s4" name="Poistaminen" source="/Users/noorapura/Documents/kurssit/ohjelmistotuotanto/miniprojekti/miniprojekti/src/tests/poistaminen.robot">
+<suite id="s1-s4" name="Poistaminen" source="C:\Users\kakez\Git\prokkis\miniprojekti\src\tests\poistaminen.robot">
 <test id="s1-s4-t1" name="Käyttäjä saa virheilmoituksen epäonnistuneesta poistosta" line="8">
 <kw name="Create Test Env" owner="HakuLibrary">
-<status status="PASS" start="2025-12-11T15:06:49.588829" elapsed="0.000111"/>
+<status status="PASS" start="2025-12-11T23:22:23.844238" elapsed="0.000048"/>
 </kw>
 <kw name="Set User Inputs" owner="HakuLibrary">
 <arg>poista</arg>
 <arg>abc</arg>
 <arg>poistu</arg>
-<status status="PASS" start="2025-12-11T15:06:49.589050" elapsed="0.000111"/>
+<status status="PASS" start="2025-12-11T23:22:23.844358" elapsed="0.000040"/>
 </kw>
 <kw name="Run Application" owner="HakuLibrary">
-<status status="PASS" start="2025-12-11T15:06:49.589277" elapsed="0.000087"/>
+<status status="PASS" start="2025-12-11T23:22:23.844465" elapsed="0.000032"/>
 </kw>
 <kw name="Output Should Contain" owner="HakuLibrary">
 <arg>Poistettavaa viitettä ei löytynyt</arg>
-<status status="PASS" start="2025-12-11T15:06:49.589468" elapsed="0.000094"/>
+<status status="PASS" start="2025-12-11T23:22:23.844557" elapsed="0.000036"/>
 </kw>
-<status status="PASS" start="2025-12-11T15:06:49.588444" elapsed="0.001241"/>
+<status status="PASS" start="2025-12-11T23:22:23.844027" elapsed="0.000640"/>
 </test>
 <test id="s1-s4-t2" name="Käyttäjä pystyy poistamaan viitteen tietokannasta" line="14">
 <kw name="Create Test Env" owner="HakuLibrary">
-<status status="PASS" start="2025-12-11T15:06:49.590216" elapsed="0.000107"/>
+<status status="PASS" start="2025-12-11T23:22:23.844972" elapsed="0.000041"/>
 </kw>
 <kw name="Set User Inputs" owner="HakuLibrary">
 <arg>poista</arg>
 <arg>aaa</arg>
 <arg>poistu</arg>
-<status status="PASS" start="2025-12-11T15:06:49.590428" elapsed="0.000100"/>
+<status status="PASS" start="2025-12-11T23:22:23.845073" elapsed="0.000037"/>
 </kw>
 <kw name="Run Application" owner="HakuLibrary">
-<status status="PASS" start="2025-12-11T15:06:49.590646" elapsed="0.000099"/>
+<status status="PASS" start="2025-12-11T23:22:23.845314" elapsed="0.000062"/>
 </kw>
 <kw name="Output Should Contain" owner="HakuLibrary">
 <arg>Viite poistettu</arg>
-<status status="PASS" start="2025-12-11T15:06:49.590855" elapsed="0.000094"/>
+<status status="PASS" start="2025-12-11T23:22:23.845458" elapsed="0.000055"/>
 </kw>
-<status status="PASS" start="2025-12-11T15:06:49.589881" elapsed="0.001189"/>
+<status status="PASS" start="2025-12-11T23:22:23.844829" elapsed="0.000771"/>
 </test>
-<status status="PASS" start="2025-12-11T15:06:49.587056" elapsed="0.004267"/>
+<status status="PASS" start="2025-12-11T23:22:23.842896" elapsed="0.002975"/>
 </suite>
-<status status="PASS" start="2025-12-11T15:06:49.524431" elapsed="0.067390"/>
+<status status="PASS" start="2025-12-11T23:22:22.747329" elapsed="1.099120"/>
 </suite>
 <statistics>
 <total>
