@@ -22,3 +22,6 @@ class StubDB:
 
     def poista_viite(self, viite):
         return "Viite poistettu"
+    
+    def lisaa_viiteolio(self, viite):
+        return "Viite lisätty!"
