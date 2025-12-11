@@ -50,4 +50,11 @@ Ohjelman käyttämistä varten:
 * bibtex: tulostaa annetun viitten BibTeX -muodossa
 * help: tämän avulla käyttäjä saa ohjeet ohjelman käyttöä varten
 
+ACM ohjeet:
+* ACM toimii vain Chromella.
+* ACM-linkki avautuu ikkunaan chromella jonka voi sulkea sen jälkeen kun sovellus pyytää nimeämään viitteen.
+* Pythoniin pitää asentaa seuraavat lisäosat:
+* Beautifulsoup komennolla: "pip install beautifulsoup4". Lisäohjeita: (https://pypi.org/project/beautifulsoup4/)
+* Selenium komennolla: "pip install selenium". Lisäohjeita: (https://selenium-python.readthedocs.io/installation.html)
+
 
