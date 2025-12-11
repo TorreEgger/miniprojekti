@@ -192,6 +192,28 @@ class TestHakuMock(unittest.TestCase):
         tulokset = self.repo.hae_viite_hakuehdoilla(publisher="olematon julkaisija")
         self.assertEqual(tulokset, [])
 
+    def test_paluttaa_tyhjan_kun_ei_riveja(self):
+        self.mock_db.cursor.execute = Mock()
+        self.mock_db.cursor.fetchall.return_value = []
+        tulos = self.repo.hae_viite_hakuehdoilla(author="olematon")
+        self.assertEqual(tulos, [])
+
+    def test_hae_viite_hakuehdoilla_lisaa_lisakentat(self):
+        self.mock_db.hae_kaikki.return_value = [
+            ("ABC", "article", "Matti", "Otsikko", 2024, None, None, None, None, None)
+        ]
+        self.mock_db.hae_lisakentat.return_value = [
+            ("ABC", "lisa1", "value1"),
+            ("ABC", "lisa2", "value2")
+        ]
+        tulos = self.repo.hae_viite_hakuehdoilla()
+        self.assertTrue(len(tulos) > 0)
+        viite = tulos[0]
+        self.assertIn("lisa1", viite)
+        self.assertEqual(viite["lisa1"], "value1")
+        self.assertIn("lisa2", viite)
+        self.assertEqual(viite["lisa2"], "value2")
+
     # Kaikkien viitteiden listauksien testit
     def test_listaa_kaikki_palauttaa_tyhjan_viestin_jos_ei_tuloksia(self):
         # Mockataan tyhjä tietokanta
