@@ -143,10 +143,7 @@ class Miniprojekti:
                 self.kasittele_haku(kasky)
                 continue
 
-<<<<<<< HEAD
-=======
             
->>>>>>> 08f37241ac81280262f33a8842f369fea0d29fda
             # ACM-tietokannasta viitteen tiedot
             if kasky in {'acm', 'ACM'}:
                 lisattava_viite = None
