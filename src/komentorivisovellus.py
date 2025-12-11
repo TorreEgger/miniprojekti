@@ -2,6 +2,7 @@
 from viite_repo import ViiteRepo
 from database import Database
 from viite import Viite
+from acm import acmhaku
 
 class KonsoliIO:
     def lue(self, teksti):
@@ -189,12 +190,51 @@ class Miniprojekti:
                             self._io.kirjoita(f"{k.capitalize()}: {viite[k]}")
                     self._io.kirjoita("")
                 continue
-            
+
             # ACM-tietokannasta viitteen tiedot
             if kasky in {'acm', 'ACM'}:
+                lisattava_viite = None
+                lisakentat = {}
+                
                 self._io.kirjoita("")
-                #acm = self._io.lue("Anna ACM-linkki: ")
+                ACM = self._io.lue("Anna ACM-linkki: ")
+                acmtiedot = acmhaku(ACM)
                 self._io.kirjoita("")
+
+                if acmtiedot == 0:
+                    continue
+
+                viite = self._io.lue("Syötä viite:")
+                viitetyyppi = "article"
+                self._io.kirjoita("Viitetyyppi: article")
+                tekijä = str(acmtiedot[1])
+                self._io.kirjoita("Tekijä(t): " + tekijä)
+                otsikko = str(acmtiedot[0])
+                self._io.kirjoita("Otsikko: " + otsikko)
+                vuosi = str(acmtiedot[2])
+                self._io.kirjoita("Vuosi: " + vuosi)
+                volyymi = str(acmtiedot[4])
+                self._io.kirjoita("Volyymi: " + volyymi)
+                sivut = str(acmtiedot[3])
+                self._io.kirjoita("Sivumäärä: " + sivut)
+                lehti = str(acmtiedot[5])
+                self._io.kirjoita("Lehti: " + lehti)
+                self._io.kirjoita("")
+                lisattava_viite = Viite(
+                    viite=viite,
+                    viitetyyppi=viitetyyppi,
+                    author=tekijä,
+                    title=otsikko,
+                    year=vuosi,
+                    journal=lehti,
+                    volume=volyymi,
+                    pages=sivut
+                )
+
+                lisattava_viite.lisakentat = lisakentat
+                self.repo.database.lisaa_viiteolio(lisattava_viite)
+                self._io.kirjoita("Viite lisätty!")
+
                 continue
             
             if kasky == "help":
