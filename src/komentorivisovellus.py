@@ -97,7 +97,7 @@ class Miniprojekti:
                 tarviiko = self._io.lue("Tarvitsetko lisää kenttiä? (y/n)")
                 if tarviiko == "y":
                     while True:
-                        uusi_kentta = self._io.lue("Uusi kenttä:")
+                        uusi_kentta = self._io.lue("Uusi kenttä: (jos haluat keskeyttää paina vaan enter)")
                         if uusi_kentta == "": #Jos uusi kenttä on tyhjä, silmukka päättyy
                             break             # eli paina vaan enter kun haluat poistua. lisätään ohjeisiin
                         kentan_arvo = self._io.lue("Kentän arvo:")

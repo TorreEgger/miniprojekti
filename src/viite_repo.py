@@ -123,6 +123,7 @@ class ViiteRepo:
 
     def lisaa_viite(self, viite: Viite):
 
+        # pakolliset ja mahdolliset kentät
         viitetiedot = {
             "viite": viite.viite,
             "type": viite.viitetyyppi,
