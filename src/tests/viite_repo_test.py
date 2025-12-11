@@ -193,10 +193,10 @@ class TestHakuMock(unittest.TestCase):
         self.assertEqual(tulokset, [])
 
     def test_paluttaa_tyhjan_kun_ei_riveja(self):
-        self.mock_db.cursor.execute = Mock()
-        self.mock_db.cursor.fetchall.return_value = []
-        tulos = self.repo.hae_viite_hakuehdoilla(author="olematon")
-        self.assertEqual(tulos, [])
+        self.mock_db.hae_kaikki.return_value = []
+        repo = ViiteRepo(self.mock_db)
+        tulokset = repo.hae_viite_hakuehdoilla()
+        self.assertEqual(tulokset, [])
 
     def test_hae_viite_hakuehdoilla_lisaa_lisakentat(self):
         self.mock_db.hae_kaikki.return_value = [
@@ -213,6 +213,18 @@ class TestHakuMock(unittest.TestCase):
         self.assertEqual(viite["lisa1"], "value1")
         self.assertIn("lisa2", viite)
         self.assertEqual(viite["lisa2"], "value2")
+
+    def test_huono_lisarivi_ei_muuta_dictia(self):
+        self.mock_db.hae_kaikki.return_value = [
+            {"viite": "v1", "type": "article", "author": "A", "title": "T", "year": 2023}
+        ]
+        # Lisäkenttä, jonka pituus < 3
+        self.mock_db.hae_lisakentat.return_value = [
+            ("v1",),          
+            ("v1", "field"),  
+        ]
+        tulokset = self.repo.hae_viite_hakuehdoilla()
+        self.assertNotIn("field", tulokset[0])
 
     # Kaikkien viitteiden listauksien testit
     def test_listaa_kaikki_palauttaa_tyhjan_viestin_jos_ei_tuloksia(self):
