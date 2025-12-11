@@ -145,6 +145,7 @@ class ViiteRepo:
             return 'lisäys ei onnistunut'
         return 'lisäys onnistui'
 
+    # Tulostaa kaikki viitteet ihmiselle luettavassa muodossa
     def listaa_kaikki(self):
         tulokset = self.database.hae_kaikki()
         if not tulokset:
@@ -167,6 +168,7 @@ class ViiteRepo:
                 if viite[k]:
                     rivit.append(f"{k.capitalize()}: {viite[k]}")
             
+            # Lisäkentät:
             lisakentat = self.database.hae_lisakentat(viite['viite'])
 
             for row in lisakentat:
@@ -179,6 +181,7 @@ class ViiteRepo:
         
         return "\n".join(rivit)
     
+    # Tulostaa kaikki viitteet BibTex-muodossa
     def listaa_kaikki_bibtex(self):
         tulokset = self.database.hae_kaikki()
 
