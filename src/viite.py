@@ -15,7 +15,34 @@ class Viite:
             self.lisakentat = {}
         else:
             self.lisakentat = lisakentat
+    def merkkijonoksi(self):
+        #kaikille yhteiset kentät
+        lines = [f"viite: {self.viite}",
+                 f"type: {self.viitetyyppi}",
+                 f"author: {self.author}",
+                 f"title: {self.title}",
+                 f"year: {self.year}"]
+        
+        #varmistetaan taaksepäin yhteensopivuus
+        if self.journal:
+            lines.append(f"journal: {self.journal}")
+        if self.booktitle:
+            lines.append(f"booktitle: {self.booktitle}")
+        if self.volume:
+            lines.append(f"volume: {self.volume}")
+        if self.pages:
+            lines.append(f"pages: {self.pages}")
+        if self.publisher:
+            lines.append(f"publisher: {self.publisher}")
 
+        #lisäkentät
+        if self.lisakentat:
+            for key, value in self.lisakentat.items():
+                lines.append(f"{key}: {value}")
+
+        #nivotaan yhteen uusille riveille
+        return "\n".join(lines)
+    
     def to_bibtex(self):
         lines = [f"@{self.viitetyyppi}{{{self.viite},",
                  f"    author = {{{self.author}}},",

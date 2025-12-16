@@ -62,3 +62,9 @@ class TestViite(unittest.TestCase):
         bibtex = self.viite.to_bibtex()
         self.assertTrue(bibtex.startswith("@book{"))
         self.assertTrue(bibtex.endswith("}"))
+
+    def test_viite_merkkijonoksi_antaa_oikeanlaisen_tuloksen(self):
+        mjono = self.viite.merkkijonoksi()
+
+        self.assertTrue(mjono.startswith("viite"))
+        self.assertTrue(mjono.endswith("extra"))

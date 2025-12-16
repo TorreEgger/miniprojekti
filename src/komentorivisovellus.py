@@ -228,8 +228,7 @@ class Miniprojekti:
                 self._io.kirjoita("Viitettä ei löytynyt")
             else:
                 self._io.kirjoita("")
-                self._io.kirjoita(viite.viite)
-                self._io.kirjoita(viite.title)
+                self._io.kirjoita(viite.merkkijonoksi())
                 self._io.kirjoita("")
             return
 
