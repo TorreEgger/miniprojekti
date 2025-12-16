@@ -6,6 +6,8 @@ Ryhmän 6 toteuttama miniprojekti
 
 Projektin backlog: https://jyu-my.sharepoint.com/:x:/g/personal/kirskaxt_jyu_fi/IQAegL_ux5ZjSpN1c-rVZH4CAadPDwjwBHSxYaUqLI5SDEg?e=omyNjP
 
+Raportti: https://jyu-my.sharepoint.com/:w:/g/personal/oneemasa_jyu_fi1/IQDijRrZnmv8Tr5IeFBzHzM4Aa_O8TR-sGAWFK4AK56QsQc?e=Bna5J5
+
 # Definition Of Done (DOD)
 
 Jotta voimme määrittää jonkun vaatimuksen olevan valmis, seuraamme seuraavaa listausta:
